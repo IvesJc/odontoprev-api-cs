@@ -1,4 +1,5 @@
 ﻿using odontoprev_api_cs.Data.AppData;
+using odontoprev_api_cs.DTOs.PrestadorServico;
 using odontoprev_api_cs.Entities;
 using odontoprev_api_cs.Repositories.Interface;
 
@@ -16,12 +17,12 @@ public class PrestadorServicoRepository(AppDbContext dbContext) : IPrestadorServ
         throw new NotImplementedException();
     }
 
-    public Task<PrestadorServico> CreatePrestadorServicoAsync(PrestadorServico prestadorServico)
+    public Task<PrestadorServico> CreatePrestadorServicoAsync(CreatePrestadorServicoDto prestadorServico)
     {
         throw new NotImplementedException();
     }
 
-    public Task<PrestadorServico?> UpdatePrestadorServicoByAsync(int id, PrestadorServico prestadorServico)
+    public Task<PrestadorServico?> UpdatePrestadorServicoByAsync(int id, UpdatePrestadorServicoDto prestadorServico)
     {
         throw new NotImplementedException();
     }

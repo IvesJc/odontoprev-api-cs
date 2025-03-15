@@ -1,4 +1,5 @@
 ﻿using odontoprev_api_cs.Data.AppData;
+using odontoprev_api_cs.DTOs.Servico;
 using odontoprev_api_cs.Entities;
 using odontoprev_api_cs.Repositories.Interface;
 
@@ -16,12 +17,12 @@ public class ServicoRepository(AppDbContext dbContext) :  IServicoRepository
         throw new NotImplementedException();
     }
 
-    public Task<Servico> CreateServicoAsync(Servico servico)
+    public Task<Servico> CreateServicoAsync(CreateServicoDto servico)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Servico?> UpdateServicoByAsync(int id, Servico servico)
+    public Task<Servico?> UpdateServicoByAsync(int id, UpdateServicoDto servico)
     {
         throw new NotImplementedException();
     }

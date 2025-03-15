@@ -1,4 +1,5 @@
 ﻿using odontoprev_api_cs.Data.AppData;
+using odontoprev_api_cs.DTOs.EmpresaContratante;
 using odontoprev_api_cs.Entities;
 using odontoprev_api_cs.Repositories.Interface;
 
@@ -16,12 +17,12 @@ public class EmpresaContratanteRepository(AppDbContext dbContext) : IEmpresaCont
         throw new NotImplementedException();
     }
 
-    public Task<EmpresaContratante> CreateEmpresaContratanteAsync(EmpresaContratante empresaContratante)
+    public Task<EmpresaContratante> CreateEmpresaContratanteAsync(CreateEmpresaContratanteDto empresaContratante)
     {
         throw new NotImplementedException();
     }
 
-    public Task<EmpresaContratante?> UpdateEmpresaContratanteByAsync(int id, EmpresaContratante empresaContratante)
+    public Task<EmpresaContratante?> UpdateEmpresaContratanteByAsync(int id, UpdateEmpresaContratanteDto empresaContratante)
     {
         throw new NotImplementedException();
     }

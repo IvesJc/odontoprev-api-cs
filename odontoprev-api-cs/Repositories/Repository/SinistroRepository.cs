@@ -1,4 +1,5 @@
 ﻿using odontoprev_api_cs.Data.AppData;
+using odontoprev_api_cs.DTOs.Sinistro;
 using odontoprev_api_cs.Entities;
 using odontoprev_api_cs.Repositories.Interface;
 
@@ -16,12 +17,12 @@ public class SinistroRepository(AppDbContext dbContext) : ISinistroRepository
         throw new NotImplementedException();
     }
 
-    public Task<Sinistro> CreateSinistroAsync(Sinistro sinistro)
+    public Task<Sinistro> CreateSinistroAsync(CreateSinistroDto sinistro)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Sinistro?> UpdateSinistroByAsync(int id, Sinistro sinistro)
+    public Task<Sinistro?> UpdateSinistroByAsync(int id, UpdateSinistroDto sinistro)
     {
         throw new NotImplementedException();
     }

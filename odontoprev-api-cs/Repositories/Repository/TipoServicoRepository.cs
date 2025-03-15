@@ -1,4 +1,5 @@
 ﻿using odontoprev_api_cs.Data.AppData;
+using odontoprev_api_cs.DTOs.TipoServico;
 using odontoprev_api_cs.Entities;
 using odontoprev_api_cs.Repositories.Interface;
 
@@ -16,12 +17,12 @@ public class TipoServicoRepository(AppDbContext dbContext) :  ITipoServicoReposi
         throw new NotImplementedException();
     }
 
-    public Task<TipoServico> CreateTipoServicoAsync(TipoServico tipoServico)
+    public Task<TipoServico> CreateTipoServicoAsync(CreateTipoServicoDto tipoServico)
     {
         throw new NotImplementedException();
     }
 
-    public Task<TipoServico?> UpdateTipoServicoByAsync(int id, TipoServico tipoServico)
+    public Task<TipoServico?> UpdateTipoServicoByAsync(int id, UpdateTipoServicoDto tipoServico)
     {
         throw new NotImplementedException();
     }

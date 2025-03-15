@@ -1,4 +1,5 @@
 ﻿using odontoprev_api_cs.Data.AppData;
+using odontoprev_api_cs.DTOs.Recompensa;
 using odontoprev_api_cs.Entities;
 using odontoprev_api_cs.Repositories.Interface;
 
@@ -16,12 +17,12 @@ public class RecompensaRepository(AppDbContext dbContext) : IRecompensaRepositor
         throw new NotImplementedException();
     }
 
-    public Task<Recompensa> CreateRecompensaAsync(Recompensa recompensa)
+    public Task<Recompensa> CreateRecompensaAsync(CreateRecompensaDto recompensa)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Recompensa?> UpdateRecompensaByAsync(int id, Recompensa recompensa)
+    public Task<Recompensa?> UpdateRecompensaByAsync(int id, UpdateRecompensaDto recompensa)
     {
         throw new NotImplementedException();
     }

@@ -1,4 +1,5 @@
 ﻿using odontoprev_api_cs.Data.AppData;
+using odontoprev_api_cs.DTOs.TipoRecompensa;
 using odontoprev_api_cs.Entities;
 using odontoprev_api_cs.Repositories.Interface;
 
@@ -16,12 +17,12 @@ public class TipoRecompensaRepository(AppDbContext dbContext) : ITipoRecompensaR
         throw new NotImplementedException();
     }
 
-    public Task<TipoRecompensa> CreateTipoRecompensaAsync(TipoRecompensa tipoRecompensa)
+    public Task<TipoRecompensa> CreateTipoRecompensaAsync(CreateTipoRecompensaDto tipoRecompensa)
     {
         throw new NotImplementedException();
     }
 
-    public Task<TipoRecompensa?> UpdateTipoRecompensaByAsync(int id, TipoRecompensa tipoRecompensa)
+    public Task<TipoRecompensa?> UpdateTipoRecompensaByAsync(int id, UpdateTipoRecompensaDto tipoRecompensa)
     {
         throw new NotImplementedException();
     }

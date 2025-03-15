@@ -1,4 +1,5 @@
 ﻿using odontoprev_api_cs.Data.AppData;
+using odontoprev_api_cs.DTOs.Plano;
 using odontoprev_api_cs.Entities;
 using odontoprev_api_cs.Repositories.Interface;
 
@@ -16,12 +17,12 @@ public class PlanoRepository(AppDbContext  dbContext) : IPlanoRepository
         throw new NotImplementedException();
     }
 
-    public Task<Plano> CreatePlanoAsync(Plano plano)
+    public Task<Plano> CreatePlanoAsync(CreatePlanoDto plano)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Plano?> UpdatePlanoByAsync(int id, Plano plano)
+    public Task<Plano?> UpdatePlanoByAsync(int id, UpdatePlanoDto plano)
     {
         throw new NotImplementedException();
     }

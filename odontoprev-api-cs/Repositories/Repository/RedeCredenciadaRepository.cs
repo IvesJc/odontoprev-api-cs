@@ -1,4 +1,5 @@
 ﻿using odontoprev_api_cs.Data.AppData;
+using odontoprev_api_cs.DTOs.RedeCredenciada;
 using odontoprev_api_cs.Entities;
 using odontoprev_api_cs.Repositories.Interface;
 
@@ -16,12 +17,12 @@ public class RedeCredenciadaRepository(AppDbContext dbContext) :  IRedeCredencia
         throw new NotImplementedException();
     }
 
-    public Task<RedeCredenciada> CreateRedeCredenciadaAsync(RedeCredenciada redeCredenciada)
+    public Task<RedeCredenciada> CreateRedeCredenciadaAsync(CreateRedeCredenciadaDto redeCredenciada)
     {
         throw new NotImplementedException();
     }
 
-    public Task<RedeCredenciada?> UpdateRedeCredenciadaByAsync(int id, RedeCredenciada redeCredenciada)
+    public Task<RedeCredenciada?> UpdateRedeCredenciadaByAsync(int id, UpdateRedeCredenciadaDto redeCredenciada)
     {
         throw new NotImplementedException();
     }
