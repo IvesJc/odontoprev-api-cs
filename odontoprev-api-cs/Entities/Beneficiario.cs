@@ -12,7 +12,7 @@ namespace odontoprev_api_cs.Entities{
     }
 
     [Table("tb_beneficiario")]
-    public class BeneficiarioEntity
+    public class Beneficiario
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -54,13 +54,13 @@ namespace odontoprev_api_cs.Entities{
         [ForeignKey("tb_empresa_contratante")]
         public int? EmpresaContratanteId { get; set; }
 
-        public virtual ProgramaRelacionamentoStatusEntity? ProgramaRelacionamentoStatus { get; set; }
-        public virtual EnderecoEntity? Endereco { get; set; }
-        public virtual EmpresaContratanteEntity? EmpresaContratante { get; set; }
-        
-        public virtual ICollection<PlanoEntity>? Planos { get; set; }
-        public virtual ICollection<SinistroEntity>? Sinistros { get; set; }
-        public virtual ICollection<MissaoEntity>? Missoes { get; set; }
-        public virtual ICollection<RecompensaEntity>? Recompensas { get; set; }
+        // public virtual ProgramaRelacionamentoStatusEntity? ProgramaRelacionamentoStatus { get; set; }
+        // public virtual EnderecoEntity? Endereco { get; set; }
+        // public virtual EmpresaContratanteEntity? EmpresaContratante { get; set; }
+        //
+        // public virtual ICollection<PlanoEntity>? Planos { get; set; }
+        // public virtual ICollection<SinistroEntity>? Sinistros { get; set; }
+        // public virtual ICollection<MissaoEntity>? Missoes { get; set; }
+        // public virtual ICollection<RecompensaEntity>? Recompensas { get; set; }
     }
 }

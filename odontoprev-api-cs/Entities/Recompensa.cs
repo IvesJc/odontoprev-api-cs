@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace odontoprev_api_cs.Entities
 {
     [Table("tb_recompensa")]
-    public class RecompensaEntity
+    public class Recompensa
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -24,7 +24,7 @@ namespace odontoprev_api_cs.Entities
         [ForeignKey("tb_tipo_recompensa")]
         public required int TipoRecompensaId { get; set; }
 
-        public virtual BeneficiarioEntity? Beneficiario { get; set; }
-        public virtual TipoRecompensaEntity? TipoRecompensa { get; set; }
+        // public virtual BeneficiarioEntity? Beneficiario { get; set; }
+        // public virtual TipoRecompensaEntity? TipoRecompensa { get; set; }
     }
 }

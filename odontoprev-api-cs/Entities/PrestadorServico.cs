@@ -16,7 +16,7 @@ namespace odontoprev_api_cs.Entities
     }
 
     [Table("tb_prestador_servico")]
-    public class PrestadorServicoEntity
+    public class PrestadorServico
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -44,8 +44,8 @@ namespace odontoprev_api_cs.Entities
         [ForeignKey("tb_rede_credenciada")]
         public required int RedeCredenciadaId { get; set; }
 
-        public virtual RedeCredenciadaEntity? RedeCredenciada { get; set; }
-        public virtual ICollection<TipoServicoEntity>? TipoServicos { get; set; }
-        public virtual ICollection<SinistroEntity>? Sinistros { get; set; }
+        // public virtual RedeCredenciadaEntity? RedeCredenciada { get; set; }
+        // public virtual ICollection<TipoServicoEntity>? TipoServicos { get; set; }
+        // public virtual ICollection<SinistroEntity>? Sinistros { get; set; }
     }
 }

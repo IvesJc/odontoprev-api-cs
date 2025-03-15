@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace odontoprev_api_cs.Entities
 {
     [Table("tb_plano")]
-    public class PlanoEntity
+    public class Plano
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -29,8 +29,8 @@ namespace odontoprev_api_cs.Entities
 
         // Virtual Entities
 
-        public virtual EmpresaContratanteEntity? EmpresaContratante { get; set; }
-        public virtual TipoPlanoEntity? TipoPlano { get; set; }
-        public virtual ICollection<BeneficiarioEntity>? Beneficiarios { get; set; }
+        // public virtual EmpresaContratanteEntity? EmpresaContratante { get; set; }
+        // public virtual TipoPlanoEntity? TipoPlano { get; set; }
+        // public virtual ICollection<BeneficiarioEntity>? Beneficiarios { get; set; }
     }
 }

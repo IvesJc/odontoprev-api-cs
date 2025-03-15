@@ -12,7 +12,7 @@ namespace odontoprev_api_cs.Entities
     }
 
     [Table("tb_tipo_missao")]
-    public class TipoMissaoEntity
+    public class TipoMissao
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -32,6 +32,6 @@ namespace odontoprev_api_cs.Entities
         [EnumDataType(typeof(FrequenciaEnum))]
         public FrequenciaEnum Frequencia { get; set; }
 
-        public virtual ICollection<MissaoEntity>? Missoes { get; set; }
+        // public virtual ICollection<MissaoEntity>? Missoes { get; set; }
     }
 }

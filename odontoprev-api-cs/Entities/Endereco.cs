@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace odontoprev_api_cs.Entities
 {
     [Table("tb_endereco")]
-    public class EnderecoEntity
+    public class Endereco
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -32,7 +32,7 @@ namespace odontoprev_api_cs.Entities
 
         public string? Complemento { get; set; }
 
-        public virtual BeneficiarioEntity? Beneficiario { get; set; }
-        public virtual RedeCredenciadaEntity? RedeCredenciada { get; set; }
+        // public virtual BeneficiarioEntity? Beneficiario { get; set; }
+        // public virtual RedeCredenciadaEntity? RedeCredenciada { get; set; }
     }
 }

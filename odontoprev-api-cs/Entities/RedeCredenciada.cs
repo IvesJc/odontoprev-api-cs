@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace odontoprev_api_cs.Entities
 {
     [Table("tb_rede_credenciada")]
-    public class RedeCredenciadaEntity
+    public class RedeCredenciada
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -14,7 +14,7 @@ namespace odontoprev_api_cs.Entities
         [StringLength(100)]
         public required string Nome { get; set; }
 
-        public virtual ICollection<EnderecoEntity>? Enderecos { get; set; }
-        public virtual ICollection<PrestadorServicoEntity>? PrestadorServicos { get; set; }
+        // public virtual ICollection<EnderecoEntity>? Enderecos { get; set; }
+        // public virtual ICollection<PrestadorServicoEntity>? PrestadorServicos { get; set; }
     }
 }

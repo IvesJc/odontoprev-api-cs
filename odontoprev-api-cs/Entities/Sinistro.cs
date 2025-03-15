@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace odontoprev_api_cs.Entities
 {
     [Table("tb_sinistro")]
-    public class SinistroEntity
+    public class Sinistro
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -26,8 +26,8 @@ namespace odontoprev_api_cs.Entities
         [ForeignKey("tb_prestador_servico")]
         public required int PrestadorServicoId { get; set; }
 
-        public virtual BeneficiarioEntity? Beneficiario { get; set; }
-        public virtual PrestadorServicoEntity? PrestadorServico { get; set; }
-        public virtual ICollection<ServicoEntity>? Servicos { get; set; }
+        // public virtual BeneficiarioEntity? Beneficiario { get; set; }
+        // public virtual PrestadorServicoEntity? PrestadorServico { get; set; }
+        // public virtual ICollection<ServicoEntity>? Servicos { get; set; }
     }
 }

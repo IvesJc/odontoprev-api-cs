@@ -10,7 +10,7 @@ namespace odontoprev_api_cs.Entities
     }
 
     [Table("tb_tipo_recompensa")]
-    public class TipoRecompensaEntity
+    public class TipoRecompensa
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -27,6 +27,6 @@ namespace odontoprev_api_cs.Entities
         [EnumDataType(typeof(AplicacaoEnum))]
         public required AplicacaoEnum Aplicacao { get; set; }
 
-        public virtual ICollection<RecompensaEntity>? Recompensas { get; set; }
+        // public virtual ICollection<RecompensaEntity>? Recompensas { get; set; }
     }
 }

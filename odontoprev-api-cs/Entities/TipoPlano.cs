@@ -11,7 +11,7 @@ namespace odontoprev_api_cs.Entities
     }
 
     [Table("tb_tipo_plano")]
-    public class TipoPlanoEntity
+    public class TipoPlano
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -34,7 +34,7 @@ namespace odontoprev_api_cs.Entities
         [Required]
         public required int ValidadeDias { get; set; }
 
-        public virtual ICollection<TipoServicoEntity>? TipoServicos { get; set; }
-        public virtual ICollection<PlanoEntity>? Planos { get; set; }
+        // public virtual ICollection<TipoServicoEntity>? TipoServicos { get; set; }
+        // public virtual ICollection<PlanoEntity>? Planos { get; set; }
     }
 }

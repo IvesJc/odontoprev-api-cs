@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace odontoprev_api_cs.Entities
 {
     [Table("tb_programa_relacionamento_status")]
-    public class ProgramaRelacionamentoStatusEntity
+    public class ProgramaRelacionamentoStatus
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -22,6 +22,6 @@ namespace odontoprev_api_cs.Entities
         [ForeignKey("tb_beneficiario")]
         public required int BeneficiarioId { get; set; }
 
-        public virtual BeneficiarioEntity? Beneficiario { get; set; }
+        // public virtual BeneficiarioEntity? Beneficiario { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace odontoprev_api_cs.Entities
 {
     [Table("tb_empresa_contratante")]
-    public class EmpresaContratanteEntity
+    public class EmpresaContratante
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -22,7 +22,7 @@ namespace odontoprev_api_cs.Entities
         [StringLength(50)]
         public required string NumeroContrato { get; set; }
 
-        public virtual ICollection<PlanoEntity>? Planos { get; set; }
-        public virtual ICollection<BeneficiarioEntity>? Beneficiarios { get; set; }
+        // public virtual ICollection<PlanoEntity>? Planos { get; set; }
+        // public virtual ICollection<BeneficiarioEntity>? Beneficiarios { get; set; }
     }
 }
