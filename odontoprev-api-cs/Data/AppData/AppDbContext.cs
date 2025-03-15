@@ -8,20 +8,20 @@ public class AppDbContext : DbContext
     public AppDbContext(DbContextOptions options) : base(options)
     {
     }
-    public DbSet<BeneficiarioEntity> Beneficiario { get; set; }
-    public DbSet<EmpresaContratanteEntity> EmpresaContratante { get; set; }
-    public DbSet<EnderecoEntity> Endereco { get; set; }
-    public DbSet<MissaoEntity> Missao { get; set; }
-    public DbSet<PlanoEntity> Plano { get; set; }
-    public DbSet<PrestadorServicoEntity> PrestadorServico { get; set; }
-    public DbSet<ProgramaRelacionamentoStatusEntity> ProgramaRelacionamentoStatus { get; set; }
-    public DbSet<RecompensaEntity> Recompensa { get; set; }
-    public DbSet<RedeCredenciadaEntity> RedeCredenciada { get; set; }
-    public DbSet<ServicoEntity> Servico { get; set; }
-    public DbSet<SinistroEntity> Sinistro { get; set; }
-    public DbSet<TipoMissaoEntity> TipoMissao { get; set; }
-    public DbSet<TipoPlanoEntity> TipoPlano { get; set; }
-    public DbSet<TipoRecompensaEntity> TipoRecompensa { get; set; }
-    public DbSet<TipoServicoEntity> TipoServico { get; set; }
+    public DbSet<Beneficiario> Beneficiario { get; set; }
+    public DbSet<EmpresaContratante> EmpresaContratante { get; set; }
+    public DbSet<Endereco> Endereco { get; set; }
+    public DbSet<Missao> Missao { get; set; }
+    public DbSet<Plano> Plano { get; set; }
+    public DbSet<PrestadorServico> PrestadorServico { get; set; }
+    public DbSet<ProgramaRelacionamentoStatus> ProgramaRelacionamentoStatus { get; set; }
+    public DbSet<Recompensa> Recompensa { get; set; }
+    public DbSet<RedeCredenciada> RedeCredenciada { get; set; }
+    public DbSet<Servico> Servico { get; set; }
+    public DbSet<Sinistro> Sinistro { get; set; }
+    public DbSet<TipoMissao> TipoMissao { get; set; }
+    public DbSet<TipoPlano> TipoPlano { get; set; }
+    public DbSet<TipoRecompensa> TipoRecompensa { get; set; }
+    public DbSet<TipoServico> TipoServico { get; set; }
     
 }
