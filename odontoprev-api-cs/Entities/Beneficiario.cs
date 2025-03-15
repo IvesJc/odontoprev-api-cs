@@ -39,8 +39,7 @@ namespace odontoprev_api_cs.Entities{
         [RegularExpression(@"^(\+55\s ?)?(0?(\(?\d{2}\)?)?\s?\d{4,5}-?\d{4}$)")]
         public required string Telefone { get; set; }
 
-        [Required]
-        public required DateTime DataAdesao { get; set; }
+        [Required] public required DateTime DataAdesao { get; set; } = DateTime.Now;
 
         [StringLength(300)]
         public string? FotoUrl { get; set; }
