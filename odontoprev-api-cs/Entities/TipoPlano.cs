@@ -23,7 +23,7 @@ namespace odontoprev_api_cs.Entities
 
         [Required]
         [EnumDataType(typeof(TipoEnum))]
-        public required string Tipo { get; set; }
+        public required TipoEnum Tipo { get; set; }
 
         [Required]
         public required double Preco { get; set; }

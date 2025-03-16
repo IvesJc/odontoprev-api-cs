@@ -8,6 +8,6 @@
 
         public required int RecompensaPadrao { get; set; }
 
-        public FrequenciaEnum Frequencia { get; set; }
+        public int Frequencia { get; set; }
     }
 }

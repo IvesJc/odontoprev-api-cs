@@ -6,7 +6,7 @@
 
         public required int NumeroCro { get; set; }
 
-        public required EspecialidadeEnum Especialidade { get; set; }
+        public required int Especialidade { get; set; }
 
         public required string NumeroContrato { get; set; }
 

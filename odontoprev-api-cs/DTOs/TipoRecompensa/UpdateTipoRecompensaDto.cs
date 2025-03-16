@@ -6,6 +6,6 @@
 
         public required int ExpiracaoDias { get; set; }
 
-        public required AplicacaoEnum Aplicacao { get; set; }
+        public required int Aplicacao { get; set; }
     }
 }

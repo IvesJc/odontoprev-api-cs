@@ -1,11 +1,4 @@
 ﻿namespace odontoprev_api_cs.DTOs.Beneficiario{
-    public enum TipoBeneficiarioEnum
-    {
-        Pessoal,
-        Empresa,
-        Familiar, // Para planos familiares, onde o contratante terá o tipo Pessoal, e o familiar terá o tipo Familiar
-    }
-
     public class BeneficiarioDto
     {
         public int Id { get; set; }
@@ -16,7 +9,7 @@
 
         public required string Cpf { get; set; }
 
-        public required TipoBeneficiarioEnum Tipo { get; set; }
+        public required int Tipo { get; set; }
 
         public required string Telefone { get; set; }
 

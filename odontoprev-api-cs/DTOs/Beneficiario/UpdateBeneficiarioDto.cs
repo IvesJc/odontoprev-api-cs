@@ -8,7 +8,7 @@
 
         public required string Cpf { get; set; }
 
-        public required TipoBeneficiarioEnum Tipo { get; set; }
+        public required int Tipo { get; set; }
 
         public required string Telefone { get; set; }
 

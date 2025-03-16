@@ -7,7 +7,7 @@ namespace odontoprev_api_cs.DTOs.TipoPlano
     {
         public required string Nome { get; set; }
 
-        public required string Tipo { get; set; }
+        public required int Tipo { get; set; }
 
         public required double Preco { get; set; }
 
