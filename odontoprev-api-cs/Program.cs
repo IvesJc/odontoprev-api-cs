@@ -1,4 +1,14 @@
+using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
+using odontoprev_api_cs.Data.AppData;
+using odontoprev_api_cs.Repositories.Interface;
+using odontoprev_api_cs.Repositories.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<AppDbContext>(options => {
+    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQLConnection"));
+});
 
 // Add services to the container.
 
@@ -6,6 +16,33 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// builder.Services.AddControllers().AddJsonOptions(options =>
+// {
+//     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+// });
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
+
+builder.Services.AddScoped<IBeneficiarioRepository, BeneficiarioRepository>();
+builder.Services.AddScoped<IEmpresaContratanteRepository, EmpresaContratanteRepository>();
+builder.Services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+builder.Services.AddScoped<IMissaoRepository, MissaoRepository>();
+builder.Services.AddScoped<IPlanoRepository, PlanoRepository>();
+builder.Services.AddScoped<IPrestadorServicoRepository, PrestadorServicoRepository>();
+builder.Services.AddScoped<IProgramaRelacionamentoStatusRepository, ProgramaRelacionamentoStatusRepository>();
+builder.Services.AddScoped<IRecompensaRepository, RecompensaRepository>();
+builder.Services.AddScoped<IRedeCredenciadaRepository, RedeCredenciadaRepository>();
+builder.Services.AddScoped<IServicoRepository, ServicoRepository>();
+builder.Services.AddScoped<ISinistroRepository, SinistroRepository>();
+builder.Services.AddScoped<ITipoMissaoRepository, TipoMissaoRepository>();
+builder.Services.AddScoped<ITipoPlanoRepository, TipoPlanoRepository>();
+builder.Services.AddScoped<ITipoRecompensaRepository, TipoRecompensaRepository>();
+builder.Services.AddScoped<ITipoServicoRepository, TipoServicoRepository>();
 
 var app = builder.Build();
 
@@ -15,7 +52,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseRouting();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
