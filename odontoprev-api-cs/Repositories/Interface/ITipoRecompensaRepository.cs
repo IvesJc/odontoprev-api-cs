@@ -7,7 +7,7 @@ public interface ITipoRecompensaRepository
 {
     Task<List<TipoRecompensa>> GetAllTipoRecompensasAsync();
     Task<TipoRecompensa?> GetTipoRecompensaByIdAsync(int id);
-    Task<TipoRecompensa> CreateTipoRecompensaAsync(CreateTipoRecompensaDto tipoRecompensa);
+    Task<TipoRecompensa> CreateTipoRecompensaAsync(TipoRecompensa tipoRecompensa);
     Task<TipoRecompensa?> UpdateTipoRecompensaByAsync(int id, UpdateTipoRecompensaDto tipoRecompensa);
     Task<TipoRecompensa?> DeleteTipoRecompensaByAsync(int id);
 }

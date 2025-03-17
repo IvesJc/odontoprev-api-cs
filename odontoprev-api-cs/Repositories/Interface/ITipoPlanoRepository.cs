@@ -7,7 +7,7 @@ public interface ITipoPlanoRepository
 {
     Task<List<TipoPlano>> GetAllTipoPlanosAsync();
     Task<TipoPlano?> GetTipoPlanoByIdAsync(int id);
-    Task<TipoPlano> CreateTipoPlanoAsync(CreateTipoPlanoDto tipoPlano);
+    Task<TipoPlano> CreateTipoPlanoAsync(TipoPlano tipoPlano);
     Task<TipoPlano?> UpdateTipoPlanoByAsync(int id, UpdateTipoPlanoDto tipoPlano);
     Task<TipoPlano?> DeleteTipoPlanoByAsync(int id);
 }

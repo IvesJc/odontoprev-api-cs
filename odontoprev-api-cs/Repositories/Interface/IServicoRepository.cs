@@ -7,7 +7,7 @@ public interface IServicoRepository
 {
     Task<List<Servico>> GetAllServicosAsync();
     Task<Servico?> GetServicoByIdAsync(int id);
-    Task<Servico> CreateServicoAsync(CreateServicoDto servico);
+    Task<Servico> CreateServicoAsync(Servico servico);
     Task<Servico?> UpdateServicoByAsync(int id, UpdateServicoDto servico);
     Task<Servico?> DeleteServicoByAsync(int id);
 }

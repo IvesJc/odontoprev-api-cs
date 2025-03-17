@@ -1,34 +1,58 @@
-﻿using odontoprev_api_cs.Data.AppData;
+﻿using Microsoft.EntityFrameworkCore;
+using odontoprev_api_cs.Data.AppData;
 using odontoprev_api_cs.DTOs.Recompensa;
 using odontoprev_api_cs.Entities;
+using odontoprev_api_cs.Mappers.Recompensa;
 using odontoprev_api_cs.Repositories.Interface;
 
 namespace odontoprev_api_cs.Repositories.Repository;
 
 public class RecompensaRepository(AppDbContext dbContext) : IRecompensaRepository
 {
-    public Task<List<Recompensa>> GetAllRecompensasAsync()
+    public async Task<List<Recompensa>> GetAllRecompensasAsync()
     {
-        throw new NotImplementedException();
+        return await dbContext.Recompensa.ToListAsync();
     }
 
-    public Task<Recompensa?> GetRecompensaByIdAsync(int id)
+    public async Task<Recompensa?> GetRecompensaByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await dbContext.Recompensa.FindAsync(id);
     }
 
-    public Task<Recompensa> CreateRecompensaAsync(CreateRecompensaDto recompensa)
+    public async Task<Recompensa> CreateRecompensaAsync(Recompensa recompensa)
     {
-        throw new NotImplementedException();
+        await dbContext.AddAsync(recompensa);
+        await dbContext.SaveChangesAsync();
+        return recompensa;
     }
 
-    public Task<Recompensa?> UpdateRecompensaByAsync(int id, UpdateRecompensaDto recompensa)
+    public async Task<Recompensa?> UpdateRecompensaByAsync(int id, UpdateRecompensaDto updateRecompensaDto)
     {
-        throw new NotImplementedException();
+        var recompensa = await dbContext.Recompensa.FirstOrDefaultAsync(r => r.Id == id);
+        if (recompensa == null)
+        {
+            return null;
+        }
+
+        recompensa.TipoRecompensaId = updateRecompensaDto.TipoRecompensaId;
+        recompensa.BeneficiarioId = updateRecompensaDto.BeneficiarioId;
+        recompensa.ExpiraEm = updateRecompensaDto.ExpiraEm;
+        recompensa.ResgatadoEm = updateRecompensaDto.ResgatadoEm;
+
+        await dbContext.SaveChangesAsync();
+        return recompensa;
     }
 
-    public Task<Recompensa?> DeleteRecompensaByAsync(int id)
+    public async Task<Recompensa?> DeleteRecompensaByAsync(int id)
     {
-        throw new NotImplementedException();
+        var recompensa = await dbContext.Recompensa.FirstOrDefaultAsync(r => r.Id == id);
+        if (recompensa == null)
+        {
+            return null;
+        }
+
+        dbContext.Recompensa.Remove(recompensa);
+        await dbContext.SaveChangesAsync();
+        return recompensa;
     }
 }

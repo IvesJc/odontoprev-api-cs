@@ -1,34 +1,57 @@
-﻿using odontoprev_api_cs.Data.AppData;
+﻿using Microsoft.EntityFrameworkCore;
+using odontoprev_api_cs.Data.AppData;
 using odontoprev_api_cs.DTOs.ProgramaRelacionamentoStatus;
 using odontoprev_api_cs.Entities;
+using odontoprev_api_cs.Mappers.ProgramaRelacionamentoStatus;
 using odontoprev_api_cs.Repositories.Interface;
 
 namespace odontoprev_api_cs.Repositories.Repository;
 
 public class ProgramaRelacionamentoStatusRepository(AppDbContext dbContext) :  IProgramaRelacionamentoStatusRepository
 {
-    public Task<List<ProgramaRelacionamentoStatus>> GetAllProgramaRelacionamentoStatussAsync()
+    public async Task<List<ProgramaRelacionamentoStatus>> GetAllProgramaRelacionamentoStatussAsync()
     {
-        throw new NotImplementedException();
+        return await dbContext.ProgramaRelacionamentoStatus.ToListAsync();
     }
 
-    public Task<ProgramaRelacionamentoStatus?> GetProgramaRelacionamentoStatusByIdAsync(int id)
+    public async Task<ProgramaRelacionamentoStatus?> GetProgramaRelacionamentoStatusByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await dbContext.ProgramaRelacionamentoStatus.FindAsync(id);
     }
 
-    public Task<ProgramaRelacionamentoStatus> CreateProgramaRelacionamentoStatusAsync(CreateProgramaRelacionamentoStatusDto programaRelacionamentoStatus)
+    public async Task<ProgramaRelacionamentoStatus> CreateProgramaRelacionamentoStatusAsync(ProgramaRelacionamentoStatus programaRelacionamentoStatus)
     {
-        throw new NotImplementedException();
+        await dbContext.AddAsync(programaRelacionamentoStatus);
+        await dbContext.SaveChangesAsync();
+        return programaRelacionamentoStatus;
     }
 
-    public Task<ProgramaRelacionamentoStatus?> UpdateProgramaRelacionamentoStatusByAsync(int id, UpdateProgramaRelacionamentoStatusDto programaRelacionamentoStatus)
+    public async Task<ProgramaRelacionamentoStatus?> UpdateProgramaRelacionamentoStatusByAsync(int id, UpdateProgramaRelacionamentoStatusDto updateProgramaRelacionamento)
     {
-        throw new NotImplementedException();
+        var programaRelacStatus = await dbContext.ProgramaRelacionamentoStatus.FirstOrDefaultAsync(prs => prs.Id == id);
+        if (programaRelacStatus == null)
+        {
+            return null;
+        }
+        
+        programaRelacStatus.BeneficiarioId = updateProgramaRelacionamento.BeneficiarioId;
+        programaRelacStatus.DataAdesao = updateProgramaRelacionamento.DataAdesao;
+        programaRelacStatus.QtdePontos = updateProgramaRelacionamento.QtdePontos;
+        
+        await dbContext.SaveChangesAsync();
+        return programaRelacStatus;
     }
 
-    public Task<ProgramaRelacionamentoStatus?> DeleteProgramaRelacionamentoStatusByAsync(int id)
+    public async Task<ProgramaRelacionamentoStatus?> DeleteProgramaRelacionamentoStatusByAsync(int id)
     {
-        throw new NotImplementedException();
+        var programaRelacStatus = await dbContext.ProgramaRelacionamentoStatus.FirstOrDefaultAsync(prs => prs.Id == id);
+        if (programaRelacStatus == null)
+        {
+            return null;
+        }
+        
+        dbContext.ProgramaRelacionamentoStatus.Remove(programaRelacStatus);
+        await dbContext.SaveChangesAsync();
+        return programaRelacStatus;
     }
 }

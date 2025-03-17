@@ -7,7 +7,7 @@ public interface IPlanoRepository
 {
     Task<List<Plano>> GetAllPlanosAsync();
     Task<Plano?> GetPlanoByIdAsync(int id);
-    Task<Plano> CreatePlanoAsync(CreatePlanoDto plano);
+    Task<Plano> CreatePlanoAsync(Plano plano);
     Task<Plano?> UpdatePlanoByAsync(int id, UpdatePlanoDto plano);
     Task<Plano?> DeletePlanoByAsync(int id);
 }

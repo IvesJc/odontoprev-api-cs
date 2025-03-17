@@ -1,30 +1,34 @@
 ﻿using odontoprev_api_cs.DTOs.RedeCredenciada;
+using odontoprev_api_cs.DTOs.TipoServico;
 
 namespace odontoprev_api_cs.Mappers.TipoServico;
 
 public static class RedeCredenciadaMapper
 {
-    public static RedeCredenciadaDto ToRedeCredenciadaDto(this Entities.RedeCredenciada redeCredenciada)
+    public static TipoServicoDto ToTipoServicoDto(this Entities.TipoServico tipoServico)
     {
-        return new RedeCredenciadaDto
+        return new TipoServicoDto
         {
-            Id = redeCredenciada.Id,
-            Nome = redeCredenciada.Nome,
+            Id =  tipoServico.Id,
+            Nome = tipoServico.Nome,
+            ValorReais =  tipoServico.ValorReais,
         };
     }
 
-    public static Entities.RedeCredenciada ToRedeCredenciadaFromCreate(this CreateRedeCredenciadaDto dto)
+    public static Entities.TipoServico ToTipoServicoFromCreate(this CreateTipoServicoDto dto)
     {
-        return new Entities.RedeCredenciada
+        return new Entities.TipoServico
         {
             Nome = dto.Nome,
+            ValorReais = dto.ValorReais,
         };
     }
-    public static Entities.RedeCredenciada ToRedeCredenciadaFromUpdate(this UpdateRedeCredenciadaDto dto)
+    public static Entities.TipoServico ToTipoServicoFromUpdate(this UpdateTipoServicoDto dto)
     {
-        return new Entities.RedeCredenciada
+        return new Entities.TipoServico
         {
             Nome = dto.Nome,
+            ValorReais = dto.ValorReais,
         };
     }
 }

@@ -8,7 +8,7 @@ public interface IEnderecoRepository
 {
     Task<List<Endereco>> GetAllEnderecosAsync();
     Task<Endereco?> GetEnderecoByIdAsync(int id);
-    Task<Endereco> CreateEnderecoAsync(CreateEnderecoDto endereco);
+    Task<Endereco> CreateEnderecoAsync(Endereco endereco);
     Task<Endereco?> UpdateEnderecoByAsync(int id, UpdateEnderecoDto endereco);
     Task<Endereco?> DeleteEnderecoByAsync(int id);
 }

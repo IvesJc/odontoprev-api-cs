@@ -1,34 +1,57 @@
-﻿using odontoprev_api_cs.Data.AppData;
+﻿using Microsoft.EntityFrameworkCore;
+using odontoprev_api_cs.Data.AppData;
 using odontoprev_api_cs.DTOs.TipoRecompensa;
 using odontoprev_api_cs.Entities;
+using odontoprev_api_cs.Mappers.TipoRecompensa;
 using odontoprev_api_cs.Repositories.Interface;
 
 namespace odontoprev_api_cs.Repositories.Repository;
 
 public class TipoRecompensaRepository(AppDbContext dbContext) : ITipoRecompensaRepository
 {
-    public Task<List<TipoRecompensa>> GetAllTipoRecompensasAsync()
+    public async Task<List<TipoRecompensa>> GetAllTipoRecompensasAsync()
     {
-        throw new NotImplementedException();
+        return await dbContext.TipoRecompensa.ToListAsync();
     }
 
-    public Task<TipoRecompensa?> GetTipoRecompensaByIdAsync(int id)
+    public async Task<TipoRecompensa?> GetTipoRecompensaByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await dbContext.TipoRecompensa.FindAsync(id);
     }
 
-    public Task<TipoRecompensa> CreateTipoRecompensaAsync(CreateTipoRecompensaDto tipoRecompensa)
+    public async Task<TipoRecompensa> CreateTipoRecompensaAsync(TipoRecompensa tipoRecompensa)
     {
-        throw new NotImplementedException();
+        await dbContext.AddAsync(tipoRecompensa);
+        await dbContext.SaveChangesAsync();
+        return tipoRecompensa;
     }
 
-    public Task<TipoRecompensa?> UpdateTipoRecompensaByAsync(int id, UpdateTipoRecompensaDto tipoRecompensa)
+    public async Task<TipoRecompensa?> UpdateTipoRecompensaByAsync(int id, UpdateTipoRecompensaDto updateTipoRecompensa)
     {
-        throw new NotImplementedException();
+        var tipoRecompensa = await dbContext.TipoRecompensa.FirstOrDefaultAsync(tr => tr.Id == id);
+        if (tipoRecompensa == null)
+        {
+            return null;
+        }
+        
+        tipoRecompensa.Aplicacao = (AplicacaoEnum)updateTipoRecompensa.Aplicacao;
+        tipoRecompensa.Nome = updateTipoRecompensa.Nome;
+        tipoRecompensa.ExpiracaoDias = updateTipoRecompensa.ExpiracaoDias;
+        
+        await dbContext.SaveChangesAsync();
+        return tipoRecompensa;
     }
 
-    public Task<TipoRecompensa?> DeleteTipoRecompensaByAsync(int id)
+    public async Task<TipoRecompensa?> DeleteTipoRecompensaByAsync(int id)
     {
-        throw new NotImplementedException();
+        var tipoRecompensa = await dbContext.TipoRecompensa.FirstOrDefaultAsync(tr => tr.Id == id);
+        if (tipoRecompensa == null)
+        {
+            return null;
+        }
+        
+        dbContext.Remove(tipoRecompensa);
+        await dbContext.SaveChangesAsync();
+        return tipoRecompensa;
     }
 }

@@ -7,7 +7,7 @@ public interface IProgramaRelacionamentoStatusRepository
 {
     Task<List<ProgramaRelacionamentoStatus>> GetAllProgramaRelacionamentoStatussAsync();
     Task<ProgramaRelacionamentoStatus?> GetProgramaRelacionamentoStatusByIdAsync(int id);
-    Task<ProgramaRelacionamentoStatus> CreateProgramaRelacionamentoStatusAsync(CreateProgramaRelacionamentoStatusDto programaRelacionamentoStatus);
+    Task<ProgramaRelacionamentoStatus> CreateProgramaRelacionamentoStatusAsync(ProgramaRelacionamentoStatus createProgramaRelacionamentoStatusDto);
     Task<ProgramaRelacionamentoStatus?> UpdateProgramaRelacionamentoStatusByAsync(int id, UpdateProgramaRelacionamentoStatusDto programaRelacionamentoStatus);
     Task<ProgramaRelacionamentoStatus?> DeleteProgramaRelacionamentoStatusByAsync(int id);
 }

@@ -1,34 +1,60 @@
-﻿using odontoprev_api_cs.Data.AppData;
+﻿using Microsoft.EntityFrameworkCore;
+using odontoprev_api_cs.Data.AppData;
 using odontoprev_api_cs.DTOs.Plano;
 using odontoprev_api_cs.Entities;
+using odontoprev_api_cs.Mappers.Plano;
 using odontoprev_api_cs.Repositories.Interface;
 
 namespace odontoprev_api_cs.Repositories.Repository;
 
-public class PlanoRepository(AppDbContext  dbContext) : IPlanoRepository
+public class PlanoRepository(AppDbContext dbContext) : IPlanoRepository
 {
-    public Task<List<Plano>> GetAllPlanosAsync()
+    public async Task<List<Plano>> GetAllPlanosAsync()
     {
-        throw new NotImplementedException();
+        return await dbContext.Plano.ToListAsync()
+            ;
     }
 
-    public Task<Plano?> GetPlanoByIdAsync(int id)
+    public async Task<Plano?> GetPlanoByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await dbContext.Plano.FindAsync(id);
     }
 
-    public Task<Plano> CreatePlanoAsync(CreatePlanoDto plano)
+    public async Task<Plano> CreatePlanoAsync(Plano plano)
     {
-        throw new NotImplementedException();
+        await dbContext.AddAsync(plano);
+        await dbContext.SaveChangesAsync();
+        return plano;
     }
 
-    public Task<Plano?> UpdatePlanoByAsync(int id, UpdatePlanoDto plano)
+    public async Task<Plano?> UpdatePlanoByAsync(int id, UpdatePlanoDto updatePlano)
     {
-        throw new NotImplementedException();
+        var plano = await dbContext.Plano.FirstOrDefaultAsync(pl => pl.Id == id);
+        if (plano == null)
+        {
+            return null;
+        }
+
+        plano.TipoPlanoId = updatePlano.TipoPlanoId;
+        plano.DataExpiracao = updatePlano.DataExpiracao;
+        plano.PrecoCobrado = updatePlano.PrecoCobrado;
+        plano.DataFinalCarencia = updatePlano.DataFinalCarencia;
+        plano.EmpresaContratanteId = updatePlano.EmpresaContratanteId;
+
+        await dbContext.SaveChangesAsync();
+        return plano;
     }
 
-    public Task<Plano?> DeletePlanoByAsync(int id)
+    public async Task<Plano?> DeletePlanoByAsync(int id)
     {
-        throw new NotImplementedException();
+        var plano = await dbContext.Plano.FirstOrDefaultAsync(pl => pl.Id == id);
+        if (plano == null)
+        {
+            return null;
+        }
+
+        dbContext.Plano.Remove(plano);
+        await dbContext.SaveChangesAsync();
+        return plano;
     }
 }

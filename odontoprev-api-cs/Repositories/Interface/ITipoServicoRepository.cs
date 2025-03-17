@@ -7,7 +7,7 @@ public interface ITipoServicoRepository
 {
     Task<List<TipoServico>> GetAllTipoServicosAsync();
     Task<TipoServico?> GetTipoServicoByIdAsync(int id);
-    Task<TipoServico> CreateTipoServicoAsync(CreateTipoServicoDto tipoServico);
+    Task<TipoServico> CreateTipoServicoAsync(TipoServico tipoServico);
     Task<TipoServico?> UpdateTipoServicoByAsync(int id, UpdateTipoServicoDto tipoServico);
     Task<TipoServico?> DeleteTipoServicoByAsync(int id);
 }

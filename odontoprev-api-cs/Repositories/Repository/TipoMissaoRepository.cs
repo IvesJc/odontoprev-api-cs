@@ -1,34 +1,58 @@
-﻿using odontoprev_api_cs.Data.AppData;
+﻿using Microsoft.EntityFrameworkCore;
+using odontoprev_api_cs.Data.AppData;
 using odontoprev_api_cs.DTOs.TipoMissao;
 using odontoprev_api_cs.Entities;
+using odontoprev_api_cs.Mappers.TipoMissao;
 using odontoprev_api_cs.Repositories.Interface;
 
 namespace odontoprev_api_cs.Repositories.Repository;
 
 public class TipoMissaoRepository(AppDbContext dbContext) : ITipoMissaoRepository
 {
-    public Task<List<TipoMissao>> GetAllTipoMissaosAsync()
+    public async Task<List<TipoMissao>> GetAllTipoMissaosAsync()
     {
-        throw new NotImplementedException();
+        return await dbContext.TipoMissao.ToListAsync();
     }
 
-    public Task<TipoMissao?> GetTipoMissaoByIdAsync(int id)
+    public async Task<TipoMissao?> GetTipoMissaoByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await dbContext.TipoMissao.FindAsync(id);
     }
 
-    public Task<TipoMissao> CreateTipoMissaoAsync(CreateTipoMissaoDto tipoMissao)
+    public async Task<TipoMissao> CreateTipoMissaoAsync(TipoMissao tipoMissao)
     {
-        throw new NotImplementedException();
+        await dbContext.AddAsync(tipoMissao);
+        await dbContext.SaveChangesAsync();
+        return tipoMissao;
     }
 
-    public Task<TipoMissao?> UpdateTipoMissaoByAsync(int id, UpdateTipoMissaoDto tipoMissao)
+    public async Task<TipoMissao?> UpdateTipoMissaoByAsync(int id, UpdateTipoMissaoDto updateTipoMissao)
     {
-        throw new NotImplementedException();
+        var tipoMissao = await dbContext.TipoMissao.FirstOrDefaultAsync(tm => tm.Id == id);
+        if (tipoMissao == null)
+        {
+            return null;
+        }
+        
+        tipoMissao.Frequencia = (FrequenciaEnum)updateTipoMissao.Frequencia;
+        tipoMissao.Titulo = updateTipoMissao.Titulo;
+        tipoMissao.RecompensaPadrao = updateTipoMissao.RecompensaPadrao;
+        tipoMissao.DuracaoPadraoDias = updateTipoMissao.DuracaoPadraoDias;
+
+        await dbContext.SaveChangesAsync();
+        return tipoMissao;
     }
 
-    public Task<TipoMissao?> DeleteTipoMissaoByAsync(int id)
+    public async Task<TipoMissao?> DeleteTipoMissaoByAsync(int id)
     {
-        throw new NotImplementedException();
+        var tipoMissao = await dbContext.TipoMissao.FirstOrDefaultAsync(tm => tm.Id == id);
+        if (tipoMissao == null)
+        {
+            return null;
+        }
+        
+        dbContext.Remove(tipoMissao);
+        await dbContext.SaveChangesAsync();
+        return tipoMissao;
     }
 }

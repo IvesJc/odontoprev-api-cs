@@ -1,34 +1,58 @@
-﻿using odontoprev_api_cs.Data.AppData;
+﻿using Microsoft.EntityFrameworkCore;
+using odontoprev_api_cs.Data.AppData;
 using odontoprev_api_cs.DTOs.EmpresaContratante;
 using odontoprev_api_cs.Entities;
+using odontoprev_api_cs.Mappers.EmpresaContratante;
 using odontoprev_api_cs.Repositories.Interface;
 
 namespace odontoprev_api_cs.Repositories.Repository;
 
 public class EmpresaContratanteRepository(AppDbContext dbContext) : IEmpresaContratanteRepository
 {
-    public Task<List<EmpresaContratante>> GetAllEmpresaContratantesAsync()
+    public async Task<List<EmpresaContratante>> GetAllEmpresaContratantesAsync()
     {
-        throw new NotImplementedException();
+        return await dbContext.EmpresaContratante.ToListAsync();
     }
 
-    public Task<EmpresaContratante?> GetEmpresaContratanteByIdAsync(int id)
+    public async Task<EmpresaContratante?> GetEmpresaContratanteByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await dbContext.EmpresaContratante.FindAsync(id);
+
     }
 
-    public Task<EmpresaContratante> CreateEmpresaContratanteAsync(CreateEmpresaContratanteDto empresaContratante)
+    public async Task<EmpresaContratante> CreateEmpresaContratanteAsync(EmpresaContratante empresaContratante)
     {
-        throw new NotImplementedException();
+        await dbContext.AddAsync(empresaContratante);
+        await dbContext.SaveChangesAsync();
+        return empresaContratante;
     }
 
-    public Task<EmpresaContratante?> UpdateEmpresaContratanteByAsync(int id, UpdateEmpresaContratanteDto empresaContratante)
+    public async Task<EmpresaContratante?> UpdateEmpresaContratanteByAsync(int id, UpdateEmpresaContratanteDto updateEmpresaContratante)
     {
-        throw new NotImplementedException();
+        var empresaContratante = await dbContext.EmpresaContratante.FirstOrDefaultAsync(ec => ec.Id == id);
+        if (empresaContratante == null)
+        {
+            return null;
+        }
+        
+        empresaContratante.Nome = updateEmpresaContratante.Nome;
+        empresaContratante.Cnpj = updateEmpresaContratante.Cnpj;
+        empresaContratante.NumeroContrato = updateEmpresaContratante.NumeroContrato;
+
+        await dbContext.SaveChangesAsync();
+        return empresaContratante;
     }
 
-    public Task<EmpresaContratante?> DeleteEmpresaContratanteByAsync(int id)
+    public async Task<EmpresaContratante?> DeleteEmpresaContratanteByAsync(int id)
     {
-        throw new NotImplementedException();
+        var empresaContratante = await dbContext.EmpresaContratante.FirstOrDefaultAsync(ec => ec.Id == id);
+        if (empresaContratante == null)
+        {
+            return null;
+        }
+        
+        dbContext.EmpresaContratante.Remove(empresaContratante);
+        await dbContext.SaveChangesAsync();
+        return empresaContratante;
     }
 }

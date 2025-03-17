@@ -1,34 +1,59 @@
-﻿using odontoprev_api_cs.Data.AppData;
+﻿using Microsoft.EntityFrameworkCore;
+using odontoprev_api_cs.Data.AppData;
 using odontoprev_api_cs.DTOs.TipoPlano;
 using odontoprev_api_cs.Entities;
+using odontoprev_api_cs.Mappers.TipoPlano;
 using odontoprev_api_cs.Repositories.Interface;
 
 namespace odontoprev_api_cs.Repositories.Repository;
 
 public class TipoPlanoRepository(AppDbContext dbContext) : ITipoPlanoRepository
 {
-    public Task<List<TipoPlano>> GetAllTipoPlanosAsync()
+    public async Task<List<TipoPlano>> GetAllTipoPlanosAsync()
     {
-        throw new NotImplementedException();
+        return await dbContext.TipoPlano.ToListAsync();
     }
 
-    public Task<TipoPlano?> GetTipoPlanoByIdAsync(int id)
+    public async Task<TipoPlano?> GetTipoPlanoByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await dbContext.TipoPlano.FindAsync(id);
     }
 
-    public Task<TipoPlano> CreateTipoPlanoAsync(CreateTipoPlanoDto tipoPlano)
+    public async Task<TipoPlano> CreateTipoPlanoAsync(TipoPlano tipoPlano)
     {
-        throw new NotImplementedException();
+        await dbContext.AddAsync(tipoPlano);
+        await dbContext.SaveChangesAsync();
+        return tipoPlano;
     }
 
-    public Task<TipoPlano?> UpdateTipoPlanoByAsync(int id, UpdateTipoPlanoDto tipoPlano)
+    public async Task<TipoPlano?> UpdateTipoPlanoByAsync(int id, UpdateTipoPlanoDto updateTipoPlano)
     {
-        throw new NotImplementedException();
+        var tipoPlano = await dbContext.TipoPlano.FirstOrDefaultAsync(tp => tp.Id == id);
+        if (tipoPlano == null)
+        {
+            return null;
+        }
+        
+        tipoPlano.Tipo = (TipoEnum)updateTipoPlano.Tipo;
+        tipoPlano.Nome = updateTipoPlano.Nome;
+        tipoPlano.Preco = updateTipoPlano.Preco;
+        tipoPlano.CarenciaDias = updateTipoPlano.CarenciaDias;
+        tipoPlano.ValidadeDias = updateTipoPlano.ValidadeDias;
+        
+        await dbContext.SaveChangesAsync();
+        return tipoPlano;
     }
 
-    public Task<TipoPlano?> DeleteTipoPlanoByAsync(int id)
+    public async Task<TipoPlano?> DeleteTipoPlanoByAsync(int id)
     {
-        throw new NotImplementedException();
+        var tipoPlano = await dbContext.TipoPlano.FirstOrDefaultAsync(tp => tp.Id == id);
+        if (tipoPlano == null)
+        {
+            return null;
+        }
+        
+        dbContext.TipoPlano.Remove(tipoPlano);
+        await dbContext.SaveChangesAsync();
+        return tipoPlano;
     }
 }

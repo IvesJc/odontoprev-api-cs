@@ -7,7 +7,7 @@ public interface IRedeCredenciadaRepository
 {
     Task<List<RedeCredenciada>> GetAllRedeCredenciadasAsync();
     Task<RedeCredenciada?> GetRedeCredenciadaByIdAsync(int id);
-    Task<RedeCredenciada> CreateRedeCredenciadaAsync(CreateRedeCredenciadaDto redeCredenciada);
+    Task<RedeCredenciada> CreateRedeCredenciadaAsync(RedeCredenciada redeCredenciada);
     Task<RedeCredenciada?> UpdateRedeCredenciadaByAsync(int id, UpdateRedeCredenciadaDto redeCredenciada);
     Task<RedeCredenciada?> DeleteRedeCredenciadaByAsync(int id);
 }

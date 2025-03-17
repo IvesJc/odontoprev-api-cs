@@ -7,7 +7,7 @@ public interface IBeneficiarioRepository
 {
     Task<List<Beneficiario>> GetAllBeneficiariosAsync();
     Task<Beneficiario?> GetBeneficiarioByIdAsync(int id);
-    Task<Beneficiario> CreateBeneficiarioAsync(CreateBeneficiarioDto beneficiario);
+    Task<Beneficiario> CreateBeneficiarioAsync(Beneficiario beneficiario);
     Task<Beneficiario?> UpdateBeneficiarioByAsync(int id, UpdateBeneficiarioDto beneficiario);
     Task<Beneficiario?> DeleteBeneficiarioByAsync(int id);
 }

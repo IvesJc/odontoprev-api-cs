@@ -1,34 +1,59 @@
-﻿using odontoprev_api_cs.Data.AppData;
+﻿using Microsoft.EntityFrameworkCore;
+using odontoprev_api_cs.Data.AppData;
 using odontoprev_api_cs.DTOs.Missao;
 using odontoprev_api_cs.Entities;
+using odontoprev_api_cs.Mappers.Missao;
 using odontoprev_api_cs.Repositories.Interface;
 
 namespace odontoprev_api_cs.Repositories.Repository;
 
 public class MissaoRepository(AppDbContext dbContext) : IMissaoRepository
 {
-    public Task<List<Missao>> GetAllMissaosAsync()
+    public async Task<List<Missao>> GetAllMissaosAsync()
     {
-        throw new NotImplementedException();
+        return await dbContext.Missao.ToListAsync();
     }
 
-    public Task<Missao?> GetMissaoByIdAsync(int id)
+    public async Task<Missao?> GetMissaoByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await dbContext.Missao.FindAsync(id);
     }
 
-    public Task<Missao> CreateMissaoAsync(CreateMissaoDto missao)
+    public async Task<Missao> CreateMissaoAsync(Missao missao)
     {
-        throw new NotImplementedException();
+        await dbContext.AddAsync(missao);
+        await dbContext.SaveChangesAsync();
+        return missao;
     }
 
-    public Task<Missao?> UpdateMissaoByAsync(int id, UpdateMissaoDto missao)
+    public async Task<Missao?> UpdateMissaoByAsync(int id, UpdateMissaoDto updateMissaoDto)
     {
-        throw new NotImplementedException();
+        var missao = await dbContext.Missao.FirstOrDefaultAsync(m => m.Id == id);
+        if (missao == null)
+        {
+            return missao;
+        }
+        
+        missao.TipoMissaoId = updateMissaoDto.TipoMissaoId;
+        missao.Concluido = updateMissaoDto.Concluido;
+        missao.BeneficiarioId = updateMissaoDto.BeneficiarioId;
+        missao.ExpiraEm = updateMissaoDto.ExpiraEm;
+        missao.RecompensaRecebida = updateMissaoDto.RecompensaRecebida;
+        
+        await dbContext.SaveChangesAsync();
+        return missao;
     }
 
-    public Task<Missao?> DeleteMissaoByAsync(int id)
+    public async Task<Missao?> DeleteMissaoByAsync(int id)
     {
-        throw new NotImplementedException();
+        var missao = await dbContext.Missao.FirstOrDefaultAsync(m => m.Id == id);
+        if (missao == null)
+        {
+            return missao;
+        }
+        
+        dbContext.Missao.Remove(missao);
+        await dbContext.SaveChangesAsync();
+        return missao;
     }
 }

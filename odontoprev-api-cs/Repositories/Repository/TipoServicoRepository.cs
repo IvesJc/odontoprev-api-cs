@@ -1,34 +1,54 @@
-﻿using odontoprev_api_cs.Data.AppData;
+﻿using Microsoft.EntityFrameworkCore;
+using odontoprev_api_cs.Data.AppData;
 using odontoprev_api_cs.DTOs.TipoServico;
 using odontoprev_api_cs.Entities;
+using odontoprev_api_cs.Mappers.TipoServico;
 using odontoprev_api_cs.Repositories.Interface;
 
 namespace odontoprev_api_cs.Repositories.Repository;
 
 public class TipoServicoRepository(AppDbContext dbContext) :  ITipoServicoRepository
 {
-    public Task<List<TipoServico>> GetAllTipoServicosAsync()
+    public async Task<List<TipoServico>> GetAllTipoServicosAsync()
     {
-        throw new NotImplementedException();
+        return await dbContext.TipoServico.ToListAsync();
     }
 
-    public Task<TipoServico?> GetTipoServicoByIdAsync(int id)
+    public async Task<TipoServico?> GetTipoServicoByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await dbContext.TipoServico.FindAsync(id);
     }
 
-    public Task<TipoServico> CreateTipoServicoAsync(CreateTipoServicoDto tipoServico)
+    public async Task<TipoServico> CreateTipoServicoAsync(TipoServico tipoServico)
     {
-        throw new NotImplementedException();
+        await dbContext.AddAsync(tipoServico);
+        await dbContext.SaveChangesAsync();
+        return tipoServico;
     }
 
-    public Task<TipoServico?> UpdateTipoServicoByAsync(int id, UpdateTipoServicoDto tipoServico)
+    public async Task<TipoServico?> UpdateTipoServicoByAsync(int id, UpdateTipoServicoDto updateTipoServicoDto)
     {
-        throw new NotImplementedException();
+        var tipoServico = await dbContext.TipoServico.FirstOrDefaultAsync(ts => ts.Id == id);
+        if (tipoServico == null)
+        {
+            return null;
+        }
+        
+        tipoServico.Nome = updateTipoServicoDto.Nome;
+        tipoServico.ValorReais = updateTipoServicoDto.ValorReais;
+        await dbContext.SaveChangesAsync();
+        return tipoServico;
     }
 
-    public Task<TipoServico?> DeleteTipoServicoByAsync(int id)
+    public async Task<TipoServico?> DeleteTipoServicoByAsync(int id)
     {
-        throw new NotImplementedException();
+        var tipoServico = await dbContext.TipoServico.FirstOrDefaultAsync(ts => ts.Id == id);
+        if (tipoServico == null)
+        {
+            return null;
+        } 
+        dbContext.Remove(tipoServico);
+        await dbContext.SaveChangesAsync();
+        return tipoServico;
     }
 }

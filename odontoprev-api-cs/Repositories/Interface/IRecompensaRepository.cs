@@ -7,7 +7,7 @@ public interface IRecompensaRepository
 {
     Task<List<Recompensa>> GetAllRecompensasAsync();
     Task<Recompensa?> GetRecompensaByIdAsync(int id);
-    Task<Recompensa> CreateRecompensaAsync(CreateRecompensaDto recompensa);
+    Task<Recompensa> CreateRecompensaAsync(Recompensa recompensa);
     Task<Recompensa?> UpdateRecompensaByAsync(int id, UpdateRecompensaDto recompensa);
     Task<Recompensa?> DeleteRecompensaByAsync(int id);
 }

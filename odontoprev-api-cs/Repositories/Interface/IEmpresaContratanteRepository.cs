@@ -7,7 +7,7 @@ public interface IEmpresaContratanteRepository
 {
     Task<List<EmpresaContratante>> GetAllEmpresaContratantesAsync();
     Task<EmpresaContratante?> GetEmpresaContratanteByIdAsync(int id);
-    Task<EmpresaContratante> CreateEmpresaContratanteAsync(CreateEmpresaContratanteDto empresaContratante);
+    Task<EmpresaContratante> CreateEmpresaContratanteAsync(EmpresaContratante empresaContratante);
     Task<EmpresaContratante?> UpdateEmpresaContratanteByAsync(int id, UpdateEmpresaContratanteDto empresaContratante);
     Task<EmpresaContratante?> DeleteEmpresaContratanteByAsync(int id);
 }

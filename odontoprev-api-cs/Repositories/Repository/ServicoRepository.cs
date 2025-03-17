@@ -1,34 +1,57 @@
-﻿using odontoprev_api_cs.Data.AppData;
+﻿using Microsoft.EntityFrameworkCore;
+using odontoprev_api_cs.Data.AppData;
 using odontoprev_api_cs.DTOs.Servico;
 using odontoprev_api_cs.Entities;
+using odontoprev_api_cs.Mappers.Servico;
 using odontoprev_api_cs.Repositories.Interface;
 
 namespace odontoprev_api_cs.Repositories.Repository;
 
 public class ServicoRepository(AppDbContext dbContext) :  IServicoRepository
 {
-    public Task<List<Servico>> GetAllServicosAsync()
+    public async Task<List<Servico>> GetAllServicosAsync()
     {
-        throw new NotImplementedException();
+        return await dbContext.Servico.ToListAsync();
     }
 
-    public Task<Servico?> GetServicoByIdAsync(int id)
+    public async Task<Servico?> GetServicoByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await dbContext.Servico.FindAsync(id);
     }
 
-    public Task<Servico> CreateServicoAsync(CreateServicoDto servico)
+    public async Task<Servico> CreateServicoAsync(Servico servico)
     {
-        throw new NotImplementedException();
+        await dbContext.AddAsync(servico);
+        await dbContext.SaveChangesAsync();
+        return servico;
     }
 
-    public Task<Servico?> UpdateServicoByAsync(int id, UpdateServicoDto servico)
+    public async Task<Servico?> UpdateServicoByAsync(int id, UpdateServicoDto updateServicoDto)
     {
-        throw new NotImplementedException();
+        var servico = await dbContext.Servico.FirstOrDefaultAsync(s => s.Id == id);
+        if (servico == null)
+        {
+            return null;
+        }
+        
+        servico.TipoServicoId = updateServicoDto.TipoServicoId;
+        servico.SinistroId = updateServicoDto.SinistroId;
+        servico.ValorPago = updateServicoDto.ValorPago;
+        
+        await dbContext.SaveChangesAsync();
+        return servico;
     }
 
-    public Task<Servico?> DeleteServicoByAsync(int id)
+    public async Task<Servico?> DeleteServicoByAsync(int id)
     {
-        throw new NotImplementedException();
+        var servico = await dbContext.Servico.FirstOrDefaultAsync(s => s.Id == id);
+        if (servico == null)
+        {
+            return null;
+        }
+
+        dbContext.Servico.Remove(servico);
+        await dbContext.SaveChangesAsync();
+        return servico;
     }
 }

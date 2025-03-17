@@ -7,7 +7,7 @@ public interface IMissaoRepository
 {
     Task<List<Missao>> GetAllMissaosAsync();
     Task<Missao?> GetMissaoByIdAsync(int id);
-    Task<Missao> CreateMissaoAsync(CreateMissaoDto missao);
+    Task<Missao> CreateMissaoAsync(Missao missao);
     Task<Missao?> UpdateMissaoByAsync(int id, UpdateMissaoDto missao);
     Task<Missao?> DeleteMissaoByAsync(int id);
 }
