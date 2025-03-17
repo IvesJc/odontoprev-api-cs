@@ -17,7 +17,7 @@ public static class TipoMissaoMapper
         };
     }
 
-    public static Entities.TipoMissao ToMissaoFromCreate(this CreateTipoMissaoDto dto)
+    public static Entities.TipoMissao ToTipoMissaoFromCreate(this CreateTipoMissaoDto dto)
     {
         return new Entities.TipoMissao
         {

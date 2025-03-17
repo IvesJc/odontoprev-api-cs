@@ -2,24 +2,25 @@
 using odontoprev_api_cs.DTOs.Missao;
 using odontoprev_api_cs.Mappers.Missao;
 using odontoprev_api_cs.Repositories.Interface;
+using odontoprev_api_cs.Services.Interfaces;
 
 namespace odontoprev_api_cs.Controllers;
 
 [Route("api/missao")]
 [ApiController]
-public class MissaoController(IMissaoRepository missaoRepository) : ControllerBase
+public class MissaoController(IMissaoService missaoService) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetMissoes()
     {
-        var missao = await missaoRepository.GetAllMissaosAsync();
+        var missao = await missaoService.GetAllMissaosAsync();
         return Ok(missao);
     }
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetMissaoById(int id)
     {
-        var missao = await missaoRepository.GetMissaoByIdAsync(id);
+        var missao = await missaoService.GetMissaoByIdAsync(id);
         if (missao == null)
         {
             return NotFound();
@@ -31,15 +32,14 @@ public class MissaoController(IMissaoRepository missaoRepository) : ControllerBa
     [HttpPost]
     public async Task<IActionResult> CreateMissao(CreateMissaoDto createMissaoDto)
     {
-        var missao = createMissaoDto.ToMissaoFromCreate();
-        await missaoRepository.CreateMissaoAsync(missao);
+        var missao = await missaoService.CreateMissaoAsync(createMissaoDto);
         return CreatedAtAction(nameof(GetMissaoById), new {id = missao.Id}, missao);
     }
 
     [HttpPut("{id:int}")]
     public async Task<IActionResult> UpdateMissao(int id, UpdateMissaoDto updatemissaoDto)
     {
-        var missao = await missaoRepository.UpdateMissaoByAsync(id, updatemissaoDto);
+        var missao = await missaoService.UpdateMissaoByAsync(id, updatemissaoDto);
         if (missao == null)
         {
             return NotFound();
@@ -51,8 +51,8 @@ public class MissaoController(IMissaoRepository missaoRepository) : ControllerBa
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Deletemissao(int id)
     {
-        var missao = await missaoRepository.DeleteMissaoByAsync(id);
-        if (missao == null)
+        var deleted = await missaoService.DeleteMissaoByAsync(id);
+        if (!deleted)
         {
             return NotFound();
         }

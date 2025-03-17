@@ -2,24 +2,25 @@
 using odontoprev_api_cs.DTOs.TipoMissao;
 using odontoprev_api_cs.Mappers.TipoMissao;
 using odontoprev_api_cs.Repositories.Interface;
+using odontoprev_api_cs.Services.Interfaces;
 
 namespace odontoprev_api_cs.Controllers;
 
 [Route("api/tipoMissao")]
 [ApiController]
-public class TipoMissaoController(ITipoMissaoRepository tipoMissaoRepository) : ControllerBase
+public class TipoMissaoController(ITipoMissaoService tipoMissaoService) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetTipoMissaos()
     {
-        var tipoMissao = await tipoMissaoRepository.GetAllTipoMissaosAsync();
+        var tipoMissao = await tipoMissaoService.GetAllTipoMissaosAsync();
         return Ok(tipoMissao);
     }
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetTipoMissaoById(int id)
     {
-        var tipoMissao = await tipoMissaoRepository.GetTipoMissaoByIdAsync(id);
+        var tipoMissao = await tipoMissaoService.GetTipoMissaoByIdAsync(id);
         if (tipoMissao == null)
         {
             return NotFound();
@@ -31,15 +32,14 @@ public class TipoMissaoController(ITipoMissaoRepository tipoMissaoRepository) : 
     [HttpPost]
     public async Task<IActionResult> CreateTipoMissao(CreateTipoMissaoDto createTipoMissaoDto)
     {
-        var tipoMissao = createTipoMissaoDto.ToMissaoFromCreate();
-        await tipoMissaoRepository.CreateTipoMissaoAsync(tipoMissao);
+        var tipoMissao = await tipoMissaoService.CreateTipoMissaoAsync(createTipoMissaoDto);
         return CreatedAtAction(nameof(GetTipoMissaoById), new {id = tipoMissao.Id}, tipoMissao);
     }
 
     [HttpPut("{id:int}")]
     public async Task<IActionResult> UpdateTipoMissao(int id, UpdateTipoMissaoDto updateTipoMissaoDto)
     {
-        var tipoMissao = await tipoMissaoRepository.UpdateTipoMissaoByAsync(id, updateTipoMissaoDto);
+        var tipoMissao = await tipoMissaoService.UpdateTipoMissaoByAsync(id, updateTipoMissaoDto);
         if (tipoMissao == null)
         {
             return NotFound();
@@ -51,8 +51,8 @@ public class TipoMissaoController(ITipoMissaoRepository tipoMissaoRepository) : 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteTipoMissao(int id)
     {
-        var tipoMissao = await tipoMissaoRepository.DeleteTipoMissaoByAsync(id);
-        if (tipoMissao == null)
+        var deleted = await tipoMissaoService.DeleteTipoMissaoByAsync(id);
+        if (!deleted)
         {
             return NotFound();
         }

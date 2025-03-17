@@ -3,24 +3,25 @@ using Microsoft.AspNetCore.Mvc;
 using odontoprev_api_cs.DTOs.Beneficiario;
 using odontoprev_api_cs.Mappers.Beneficiario;
 using odontoprev_api_cs.Repositories.Interface;
+using odontoprev_api_cs.Services.Interfaces;
 
 namespace odontoprev_api_cs.Controllers;
 
 [Route("api/beneficiario")]
 [ApiController]
-public class BeneficiarioController(IBeneficiarioRepository beneficiarioRepository) : ControllerBase
+public class BeneficiarioController(IBeneficiarioService beneficiarioService) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetBeneficiarios()
     {
-        var beneficiarios = await beneficiarioRepository.GetAllBeneficiariosAsync();
+        var beneficiarios = await beneficiarioService.GetAllBeneficiariosAsync();
         return Ok(beneficiarios);
     }
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetBeneficiarioById(int id)
     {
-        var beneficiario = await beneficiarioRepository.GetBeneficiarioByIdAsync(id);
+        var beneficiario = await beneficiarioService.GetBeneficiarioByIdAsync(id);
         if (beneficiario == null)
         {
             return NotFound();
@@ -32,15 +33,15 @@ public class BeneficiarioController(IBeneficiarioRepository beneficiarioReposito
     [HttpPost]
     public async Task<IActionResult> CreateBeneficiario(CreateBeneficiarioDto createBeneficiarioDto)
     {
-        var beneficiario = createBeneficiarioDto.ToBeneficiarioFromCreate();
-        await beneficiarioRepository.CreateBeneficiarioAsync(beneficiario);
-        return CreatedAtAction(nameof(GetBeneficiarioById), new {id = beneficiario.Id}, beneficiario);
+        var beneficiario = await beneficiarioService.CreateBeneficiarioAsync(createBeneficiarioDto);
+        return CreatedAtAction(nameof(GetBeneficiarioById), new { id = beneficiario.Id }, beneficiario);
     }
+
 
     [HttpPut("{id:int}")]
     public async Task<IActionResult> UpdateBeneficiario(int id, UpdateBeneficiarioDto updateBeneficiarioDto)
     {
-        var beneficiario = await beneficiarioRepository.UpdateBeneficiarioByAsync(id, updateBeneficiarioDto);
+        var beneficiario = await beneficiarioService.UpdateBeneficiarioByAsync(id, updateBeneficiarioDto);
         if (beneficiario == null)
         {
             return NotFound();
@@ -52,8 +53,8 @@ public class BeneficiarioController(IBeneficiarioRepository beneficiarioReposito
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteBeneficiario(int id)
     {
-        var beneficiario = await beneficiarioRepository.DeleteBeneficiarioByAsync(id);
-        if (beneficiario == null)
+        var deleted = await beneficiarioService.DeleteBeneficiarioByAsync(id);
+        if (!deleted)
         {
             return NotFound();
         }

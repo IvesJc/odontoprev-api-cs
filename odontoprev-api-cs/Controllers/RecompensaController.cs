@@ -2,24 +2,25 @@
 using odontoprev_api_cs.DTOs.Recompensa;
 using odontoprev_api_cs.Mappers.Recompensa;
 using odontoprev_api_cs.Repositories.Interface;
+using odontoprev_api_cs.Services.Interfaces;
 
 namespace odontoprev_api_cs.Controllers;
 
 [Route("api/recompensa")]
 [ApiController]
-public class RecompensaController(IRecompensaRepository recompensaRepository) : ControllerBase
+public class RecompensaController(IRecompensaService recompensaService) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetRecompensas()
     {
-        var recompensa = await recompensaRepository.GetAllRecompensasAsync();
+        var recompensa = await recompensaService.GetAllRecompensasAsync();
         return Ok(recompensa);
     }
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetRecompensaById(int id)
     {
-        var recompensa = await recompensaRepository.GetRecompensaByIdAsync(id);
+        var recompensa = await recompensaService.GetRecompensaByIdAsync(id);
         if (recompensa == null)
         {
             return NotFound();
@@ -31,15 +32,14 @@ public class RecompensaController(IRecompensaRepository recompensaRepository) : 
     [HttpPost]
     public async Task<IActionResult> CreateRecompensa(CreateRecompensaDto createRecompensaDto)
     {
-        var recompensa = createRecompensaDto.ToRecompensaFromCreate();
-        await recompensaRepository.CreateRecompensaAsync(recompensa);
+        var recompensa = await recompensaService.CreateRecompensaAsync(createRecompensaDto);
         return CreatedAtAction(nameof(GetRecompensaById), new {id = recompensa.Id}, recompensa);
     }
 
     [HttpPut("{id:int}")]
     public async Task<IActionResult> UpdateRecompensa(int id, UpdateRecompensaDto updateRecompensaDto)
     {
-        var recompensa = await recompensaRepository.UpdateRecompensaByAsync(id, updateRecompensaDto);
+        var recompensa = await recompensaService.UpdateRecompensaByAsync(id, updateRecompensaDto);
         if (recompensa == null)
         {
             return NotFound();
@@ -51,8 +51,8 @@ public class RecompensaController(IRecompensaRepository recompensaRepository) : 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteRecompensa(int id)
     {
-        var recompensa = await recompensaRepository.DeleteRecompensaByAsync(id);
-        if (recompensa == null)
+        var deleted = await recompensaService.DeleteRecompensaByAsync(id);
+        if (!deleted)
         {
             return NotFound();
         }
