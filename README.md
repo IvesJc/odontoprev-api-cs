@@ -44,33 +44,51 @@ O escopo do projeto abrange o desenvolvimento de uma API que gerencia beneficiá
 
 ## Desenho da Arquitetura
 
+### Monolito x Microserviços
+| Característica         | Monolito                                    | Microserviços                                   |
+|------------------------|--------------------------------------------|------------------------------------------------|
+| **Arquitetura**        | Aplicação única e centralizada            | Dividida em múltiplos serviços independentes  |
+| **Complexidade**       | Baixa (mais fácil de entender e gerenciar) | Alta (requer orquestração e comunicação)      |
+| **Escalabilidade**     | Vertical (mais difícil de escalar)         | Horizontal (permite escalabilidade individual) |
+| **Manutenção**         | Simples no início, mas pode dificultar mudanças | Mais flexível, mas exige maior coordenação |
+| **Desempenho**         | Melhor para sistemas pequenos              | Melhor para grandes sistemas distribuídos     |
+| **Deploy**            | Único, afetando toda a aplicação           | Independente para cada serviço                |
+| **Comunicação**       | Interna, sem latência extra                | Requer APIs e comunicação entre serviços      |
+| **Tolerância a falhas** | Falha pode afetar toda a aplicação        | Falhas podem ser isoladas em um único serviço |
+| **Exemplo de uso**    | Aplicações pequenas e médias               | Sistemas complexos e distribuídos             |
+
+
+### Arquitetura do Projeto: Monolito
+#### Por que?
+Optamos por uma arquitetura monolítica devido à simplicidade e pequeno porte da API. Com poucos controllers e regras de negócio, o monolito facilita a manutenção, a navegação no código e o deploy, sem a complexidade extra dos microservices. Além disso, evita o overhead de comunicação entre serviços e mantém a infraestrutura mais simples. Caso o projeto cresça e demande escalabilidade, podemos reavaliar essa decisão no futuro.
+
 ### Clean Architecture
 O projeto utiliza a Clean Architecture para promover um código desacoplado, onde cada camada tem responsabilidades bem definidas. Essa abordagem facilita a manutenção e evolução da aplicação.
 
 ### Camadas da Aplicação
 
-#### Apresentação
-A camada de apresentação é responsável pela interface da API, onde os endpoints são expostos. Essa camada é responsável por receber as requisições e retornar as respostas apropriadas.
+#### Padrão de Criação da API
+#### Service Layer (Application Service Pattern)
+Camada intermediária entre controllers e repositórios, centralizando regras de negócio.
+Uso: Para separar responsabilidades e manter a API modular.
 
-#### Aplicação
+### Controllers
+Aqui se encontra a exposição dos endpoints utilizados. Sendo eles GET, POST, PUT, DELETE.
+
+#### Services
 Nesta camada estão localizados os serviços e casos de uso da aplicação. Aqui, são implementadas as regras de negócios e a lógica que coordena as operações entre as camadas de domínio e apresentação.
 
-#### Domínio
-A camada de domínio contém os modelos e as regras de negócio. Aqui são definidos os objetos que representam os conceitos principais da aplicação, como `Beneficiario`, `Missao`, `Recompensa`, entre outros.
+#### Entites
+A camada de entidade contém os modelos e as regras de negócio. Aqui são definidos os objetos que representam os conceitos principais da aplicação, como `Beneficiario`, `Missao`, `Recompensa`, entre outros.
+
+#### Repositories
+Onde ocorre a comunicação entre a aplicação e o Banco de Dados.
 
 #### Infraestrutura
 A camada de infraestrutura é responsável pelo acesso a dados, integração com APIs externas e outros serviços de backend. Essa camada implementa os repositórios que facilitam a comunicação com o banco de dados, utilizando Entity Framework Core.
 
 ## Estrutura do Projeto
-A estrutura do projeto é organizada em pastas que correspondem às camadas da arquitetura. A seguir, apresentamos uma visão geral das principais pastas:
-
-/SorrisoAtivo.Presentation # Camada de apresentação
-
-/SorrisoAtivo.Application # Camada de aplicação
-
-/SorrisoAtivo.Domain # Camada de domínio
-
-/SorrisoAtivo.Infrastructure # Camada de infraestrutura
+A estrutura do projeto é organizada em pastas que correspondem às camadas da arquitetura. 
 
 ## Contribuição
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
