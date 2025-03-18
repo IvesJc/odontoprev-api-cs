@@ -3,7 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using Oracle.EntityFrameworkCore.Metadata;
 using odontoprev_api_cs.Data.AppData;
 
 #nullable disable
@@ -18,55 +18,55 @@ namespace odontoprev_api_cs.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.14")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            OracleModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("odontoprev_api_cs.Entities.Beneficiario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<DateTime>("DataAdesao")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<int?>("EmpresaContratanteId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int?>("EnderecoId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("FotoUrl")
                         .HasMaxLength(300)
-                        .HasColumnType("character varying(300)");
+                        .HasColumnType("NVARCHAR2(300)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("NVARCHAR2(100)");
 
                     b.Property<string>("NumeroContrato")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("NVARCHAR2(50)");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("NVARCHAR2(200)");
 
                     b.Property<string>("Telefone")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<int>("Tipo")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.HasKey("Id");
 
@@ -77,23 +77,23 @@ namespace odontoprev_api_cs.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Cnpj")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("NVARCHAR2(200)");
 
                     b.Property<string>("NumeroContrato")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("NVARCHAR2(50)");
 
                     b.HasKey("Id");
 
@@ -104,35 +104,35 @@ namespace odontoprev_api_cs.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Cep")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasColumnType("NVARCHAR2(10)");
 
                     b.Property<string>("Cidade")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("NVARCHAR2(200)");
 
                     b.Property<string>("Complemento")
-                        .HasColumnType("text");
+                        .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<string>("Estado")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("NVARCHAR2(200)");
 
                     b.Property<int>("Numero")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("Rua")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("NVARCHAR2(200)");
 
                     b.HasKey("Id");
 
@@ -143,24 +143,24 @@ namespace odontoprev_api_cs.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BeneficiarioId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("Concluido")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<DateTime>("ExpiraEm")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<int>("RecompensaRecebida")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("TipoMissaoId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.HasKey("Id");
 
@@ -171,24 +171,24 @@ namespace odontoprev_api_cs.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DataExpiracao")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<DateTime?>("DataFinalCarencia")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<int>("EmpresaContratanteId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<double>("PrecoCobrado")
-                        .HasColumnType("double precision");
+                        .HasColumnType("BINARY_DOUBLE");
 
                     b.Property<int>("TipoPlanoId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.HasKey("Id");
 
@@ -199,31 +199,31 @@ namespace odontoprev_api_cs.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("Avaliacao")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("Especialidade")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("NVARCHAR2(100)");
 
                     b.Property<string>("NumeroContrato")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("NVARCHAR2(50)");
 
                     b.Property<int>("NumeroCro")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("RedeCredenciadaId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.HasKey("Id");
 
@@ -234,18 +234,18 @@ namespace odontoprev_api_cs.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BeneficiarioId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<DateTime>("DataAdesao")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<int>("QtdePontos")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.HasKey("Id");
 
@@ -256,21 +256,21 @@ namespace odontoprev_api_cs.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BeneficiarioId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<DateTime>("ExpiraEm")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<DateTime>("ResgatadoEm")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<int>("TipoRecompensaId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.HasKey("Id");
 
@@ -281,14 +281,14 @@ namespace odontoprev_api_cs.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("NVARCHAR2(100)");
 
                     b.HasKey("Id");
 
@@ -299,18 +299,18 @@ namespace odontoprev_api_cs.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("SinistroId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("TipoServicoId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<double>("ValorPago")
-                        .HasColumnType("double precision");
+                        .HasColumnType("BINARY_DOUBLE");
 
                     b.HasKey("Id");
 
@@ -321,24 +321,24 @@ namespace odontoprev_api_cs.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BeneficiarioId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<DateTime>("DataAutorizacao")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<DateTime>("DataSolicitacao")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<int>("PrestadorServicoId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<double?>("ValorPagoParaPrestador")
-                        .HasColumnType("double precision");
+                        .HasColumnType("BINARY_DOUBLE");
 
                     b.HasKey("Id");
 
@@ -349,23 +349,23 @@ namespace odontoprev_api_cs.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("DuracaoPadraoDias")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("Frequencia")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("RecompensaPadrao")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("NVARCHAR2(200)");
 
                     b.HasKey("Id");
 
@@ -376,26 +376,26 @@ namespace odontoprev_api_cs.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CarenciaDias")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("NVARCHAR2(50)");
 
                     b.Property<double>("Preco")
-                        .HasColumnType("double precision");
+                        .HasColumnType("BINARY_DOUBLE");
 
                     b.Property<int>("Tipo")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("ValidadeDias")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.HasKey("Id");
 
@@ -406,20 +406,20 @@ namespace odontoprev_api_cs.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Aplicacao")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("ExpiracaoDias")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("NVARCHAR2(100)");
 
                     b.HasKey("Id");
 
@@ -430,17 +430,17 @@ namespace odontoprev_api_cs.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("NVARCHAR2(50)");
 
                     b.Property<double>("ValorReais")
-                        .HasColumnType("double precision");
+                        .HasColumnType("BINARY_DOUBLE");
 
                     b.HasKey("Id");
 

@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using odontoprev_api_cs.Data.AppData;
 using odontoprev_api_cs.Repositories.Interface;
 using odontoprev_api_cs.Repositories.Repository;
@@ -9,7 +10,7 @@ using odontoprev_api_cs.Services.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options => {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQLConnection"));
+    options.UseOracle(builder.Configuration.GetConnectionString("OracleSQLConnection"));
 });
 
 // Add services to the container.
@@ -23,6 +24,24 @@ builder.Services.AddSwaggerGen();
 // {
 //     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
 // });
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "OdontoPrev API - Adaptive Dialogs",
+        Version = "v1",
+        Description = "API desenvolvida para o projeto Adaptive Dialogs da OdontoPrev.",
+        License = new OpenApiLicense
+        {
+            Name = "MIT License",
+            Url = new Uri("https://opensource.org/licenses/MIT")
+        }
+    });
+
+    // Adiciona os integrantes do grupo como tags no Swagger
+    options.DocumentFilter<SwaggerGrupoFilter>();
+});
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -68,7 +87,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "OdontoPrev API - Adaptive Dialogs V1");
+        options.DocumentTitle = "OdontoPrev API - Adaptive Dialogs";
+    });
 }
 app.UseRouting();
 app.UseHttpsRedirection();

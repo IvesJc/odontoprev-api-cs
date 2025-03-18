@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using Oracle.EntityFrameworkCore.Metadata;
 using odontoprev_api_cs.Data.AppData;
 
 #nullable disable
@@ -12,8 +12,8 @@ using odontoprev_api_cs.Data.AppData;
 namespace odontoprev_api_cs.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250315123120_Initial")]
-    partial class Initial
+    [Migration("20250317235404_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,430 +21,429 @@ namespace odontoprev_api_cs.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.14")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            OracleModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("odontoprev_api_cs.Entities.BeneficiarioEntity", b =>
+            modelBuilder.Entity("odontoprev_api_cs.Entities.Beneficiario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<DateTime>("DataAdesao")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<int?>("EmpresaContratanteId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int?>("EnderecoId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("FotoUrl")
                         .HasMaxLength(300)
-                        .HasColumnType("character varying(300)");
+                        .HasColumnType("NVARCHAR2(300)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("NVARCHAR2(100)");
 
                     b.Property<string>("NumeroContrato")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("NVARCHAR2(50)");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("NVARCHAR2(200)");
 
                     b.Property<string>("Telefone")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<int>("Tipo")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.HasKey("Id");
 
                     b.ToTable("tb_beneficiario");
                 });
 
-            modelBuilder.Entity("odontoprev_api_cs.Entities.EmpresaContratanteEntity", b =>
+            modelBuilder.Entity("odontoprev_api_cs.Entities.EmpresaContratante", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Cnpj")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("NVARCHAR2(200)");
 
                     b.Property<string>("NumeroContrato")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("NVARCHAR2(50)");
 
                     b.HasKey("Id");
 
                     b.ToTable("tb_empresa_contratante");
                 });
 
-            modelBuilder.Entity("odontoprev_api_cs.Entities.EnderecoEntity", b =>
+            modelBuilder.Entity("odontoprev_api_cs.Entities.Endereco", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Cep")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasColumnType("NVARCHAR2(10)");
 
                     b.Property<string>("Cidade")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("NVARCHAR2(200)");
 
                     b.Property<string>("Complemento")
-                        .HasColumnType("text");
+                        .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<string>("Estado")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("NVARCHAR2(200)");
 
                     b.Property<int>("Numero")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("Rua")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("NVARCHAR2(200)");
 
                     b.HasKey("Id");
 
                     b.ToTable("tb_endereco");
                 });
 
-            modelBuilder.Entity("odontoprev_api_cs.Entities.MissaoEntity", b =>
+            modelBuilder.Entity("odontoprev_api_cs.Entities.Missao", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BeneficiarioId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("Concluido")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<DateTime>("ExpiraEm")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<int>("RecompensaRecebida")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("TipoMissaoId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.HasKey("Id");
 
                     b.ToTable("tb_missao");
                 });
 
-            modelBuilder.Entity("odontoprev_api_cs.Entities.PlanoEntity", b =>
+            modelBuilder.Entity("odontoprev_api_cs.Entities.Plano", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DataExpiracao")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<DateTime?>("DataFinalCarencia")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<int>("EmpresaContratanteId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<double>("PrecoCobrado")
-                        .HasColumnType("double precision");
+                        .HasColumnType("BINARY_DOUBLE");
 
                     b.Property<int>("TipoPlanoId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.HasKey("Id");
 
                     b.ToTable("tb_plano");
                 });
 
-            modelBuilder.Entity("odontoprev_api_cs.Entities.PrestadorServicoEntity", b =>
+            modelBuilder.Entity("odontoprev_api_cs.Entities.PrestadorServico", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("Avaliacao")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("Especialidade")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("NVARCHAR2(100)");
 
                     b.Property<string>("NumeroContrato")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("NVARCHAR2(50)");
 
                     b.Property<int>("NumeroCro")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("RedeCredenciadaId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.HasKey("Id");
 
                     b.ToTable("tb_prestador_servico");
                 });
 
-            modelBuilder.Entity("odontoprev_api_cs.Entities.ProgramaRelacionamentoStatusEntity", b =>
+            modelBuilder.Entity("odontoprev_api_cs.Entities.ProgramaRelacionamentoStatus", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BeneficiarioId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<DateTime>("DataAdesao")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<int>("QtdePontos")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.HasKey("Id");
 
                     b.ToTable("tb_programa_relacionamento_status");
                 });
 
-            modelBuilder.Entity("odontoprev_api_cs.Entities.RecompensaEntity", b =>
+            modelBuilder.Entity("odontoprev_api_cs.Entities.Recompensa", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BeneficiarioId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<DateTime>("ExpiraEm")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<DateTime>("ResgatadoEm")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<int>("TipoRecompensaId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.HasKey("Id");
 
                     b.ToTable("tb_recompensa");
                 });
 
-            modelBuilder.Entity("odontoprev_api_cs.Entities.RedeCredenciadaEntity", b =>
+            modelBuilder.Entity("odontoprev_api_cs.Entities.RedeCredenciada", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("NVARCHAR2(100)");
 
                     b.HasKey("Id");
 
                     b.ToTable("tb_rede_credenciada");
                 });
 
-            modelBuilder.Entity("odontoprev_api_cs.Entities.ServicoEntity", b =>
+            modelBuilder.Entity("odontoprev_api_cs.Entities.Servico", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("SinistroId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("TipoServicoId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<double>("ValorPago")
-                        .HasColumnType("double precision");
+                        .HasColumnType("BINARY_DOUBLE");
 
                     b.HasKey("Id");
 
                     b.ToTable("tb_servico");
                 });
 
-            modelBuilder.Entity("odontoprev_api_cs.Entities.SinistroEntity", b =>
+            modelBuilder.Entity("odontoprev_api_cs.Entities.Sinistro", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BeneficiarioId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<DateTime>("DataAutorizacao")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<DateTime>("DataSolicitacao")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<int>("PrestadorServicoId")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<double?>("ValorPagoParaPrestador")
-                        .HasColumnType("double precision");
+                        .HasColumnType("BINARY_DOUBLE");
 
                     b.HasKey("Id");
 
                     b.ToTable("tb_sinistro");
                 });
 
-            modelBuilder.Entity("odontoprev_api_cs.Entities.TipoMissaoEntity", b =>
+            modelBuilder.Entity("odontoprev_api_cs.Entities.TipoMissao", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("DuracaoPadraoDias")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("Frequencia")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("RecompensaPadrao")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("NVARCHAR2(200)");
 
                     b.HasKey("Id");
 
                     b.ToTable("tb_tipo_missao");
                 });
 
-            modelBuilder.Entity("odontoprev_api_cs.Entities.TipoPlanoEntity", b =>
+            modelBuilder.Entity("odontoprev_api_cs.Entities.TipoPlano", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CarenciaDias")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("NVARCHAR2(50)");
 
                     b.Property<double>("Preco")
-                        .HasColumnType("double precision");
+                        .HasColumnType("BINARY_DOUBLE");
 
-                    b.Property<string>("Tipo")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("Tipo")
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("ValidadeDias")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.HasKey("Id");
 
                     b.ToTable("tb_tipo_plano");
                 });
 
-            modelBuilder.Entity("odontoprev_api_cs.Entities.TipoRecompensaEntity", b =>
+            modelBuilder.Entity("odontoprev_api_cs.Entities.TipoRecompensa", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Aplicacao")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("ExpiracaoDias")
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("NVARCHAR2(100)");
 
                     b.HasKey("Id");
 
                     b.ToTable("tb_tipo_recompensa");
                 });
 
-            modelBuilder.Entity("odontoprev_api_cs.Entities.TipoServicoEntity", b =>
+            modelBuilder.Entity("odontoprev_api_cs.Entities.TipoServico", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("NUMBER(10)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("NVARCHAR2(50)");
 
                     b.Property<double>("ValorReais")
-                        .HasColumnType("double precision");
+                        .HasColumnType("BINARY_DOUBLE");
 
                     b.HasKey("Id");
 
