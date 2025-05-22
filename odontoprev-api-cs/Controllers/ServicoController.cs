@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using odontoprev_api_cs.DTOs.Servico;
 using odontoprev_api_cs.Mappers.Servico;
 using odontoprev_api_cs.Repositories.Interface;
@@ -8,6 +9,7 @@ namespace odontoprev_api_cs.Controllers;
 
 [Route("api/servico")]
 [ApiController]
+[Authorize]
 public class ServicoController(IServicoService servicoService) : ControllerBase
 {
     [HttpGet]

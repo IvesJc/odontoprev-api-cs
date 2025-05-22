@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using odontoprev_api_cs.DTOs.TipoPlano;
 using odontoprev_api_cs.Mappers.TipoPlano;
 using odontoprev_api_cs.Repositories.Interface;
@@ -8,6 +9,7 @@ namespace odontoprev_api_cs.Controllers;
 
 [Route("api/tipoPlano")]
 [ApiController]
+[Authorize]
 public class TipoPlanoController(ITipoPlanoService tipoPlanoService) : ControllerBase
 {
     [HttpGet]

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using odontoprev_api_cs.DTOs.Sinistro;
 using odontoprev_api_cs.Mappers.Sinistro;
 using odontoprev_api_cs.Repositories.Interface;
@@ -8,6 +9,7 @@ namespace odontoprev_api_cs.Controllers;
 
 [Route("api/sinistro")]
 [ApiController]
+[Authorize]
 public class SinistroController(ISinistroService sinistroService) : ControllerBase
 {
     [HttpGet]

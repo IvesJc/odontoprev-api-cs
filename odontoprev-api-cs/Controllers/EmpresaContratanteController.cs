@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using odontoprev_api_cs.DTOs.EmpresaContratante;
 using odontoprev_api_cs.Mappers.EmpresaContratante;
 using odontoprev_api_cs.Repositories.Interface;
@@ -8,6 +9,7 @@ namespace odontoprev_api_cs.Controllers;
 
 [Route("api/empresaContratante")]
 [ApiController]
+[Authorize]
 public class EmpresaContratanteController(IEmpresaContratanteService empresaContratanteService) : ControllerBase
 {
     [HttpGet]

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using odontoprev_api_cs.DTOs.Endereco;
 using odontoprev_api_cs.Mappers.Endereco;
 using odontoprev_api_cs.Repositories.Interface;
@@ -8,6 +9,7 @@ namespace odontoprev_api_cs.Controllers;
 
 [Route("api/endereco")]
 [ApiController]
+[Authorize]
 public class EnderecoController(IEnderecoService enderecoService) : ControllerBase
 {
     [HttpGet]

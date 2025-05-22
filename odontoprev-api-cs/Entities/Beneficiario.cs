@@ -53,6 +53,8 @@ namespace odontoprev_api_cs.Entities{
         [ForeignKey("tb_empresa_contratante")]
         public int? EmpresaContratanteId { get; set; }
 
+        public ApplicationUser ApplicationUser { get; set; }
+
         // public virtual ProgramaRelacionamentoStatusEntity? ProgramaRelacionamentoStatus { get; set; }
         // public virtual EnderecoEntity? Endereco { get; set; }
         // public virtual EmpresaContratanteEntity? EmpresaContratante { get; set; }

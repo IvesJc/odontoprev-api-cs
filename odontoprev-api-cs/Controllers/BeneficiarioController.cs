@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using odontoprev_api_cs.DTOs.Beneficiario;
 using odontoprev_api_cs.Mappers.Beneficiario;
@@ -9,6 +10,7 @@ namespace odontoprev_api_cs.Controllers;
 
 [Route("api/beneficiario")]
 [ApiController]
+[Authorize]
 public class BeneficiarioController(IBeneficiarioService beneficiarioService) : ControllerBase
 {
     [HttpGet]
