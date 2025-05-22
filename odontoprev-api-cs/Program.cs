@@ -137,6 +137,7 @@ builder.Services.AddScoped<ITipoPlanoService, TipoPlanoService>();
 builder.Services.AddScoped<ITipoRecompensaService, TipoRecompensaService>();
 builder.Services.AddScoped<ITipoServicoService, TipoServicoService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IDentalDiagnosticoService, DentalDiagnosticoService>();
 
 var app = builder.Build();
 

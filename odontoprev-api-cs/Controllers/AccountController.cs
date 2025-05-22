@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using odontoprev_api_cs.DTOs.Register;
 using odontoprev_api_cs.Entities;
 using odontoprev_api_cs.Services.Interfaces;
-using odontoprev_api_cs.Services.Services;
 
 namespace odontoprev_api_cs.Controllers;
 
