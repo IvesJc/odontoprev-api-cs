@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using odontoprev_api_cs.Entities;
 using Xunit;
 
-public class BeneficiarioIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
+public class BeneficiarioTests : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly HttpClient _client;
 
-    public BeneficiarioIntegrationTests(WebApplicationFactory<Microsoft.VisualStudio.TestPlatform.TestHost.Program> factory)
+    public BeneficiarioTests(WebApplicationFactory<Microsoft.VisualStudio.TestPlatform.TestHost.Program> factory)
     {
         _client = factory.CreateClient();
     }
