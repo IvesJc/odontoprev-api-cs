@@ -90,6 +90,78 @@ A camada de infraestrutura é responsável pelo acesso a dados, integração com
 ## Estrutura do Projeto
 A estrutura do projeto é organizada em pastas que correspondem às camadas da arquitetura. 
 
+## Testes
+
+### Tipos de Testes Implementados
+
+- **Testes Unitários**  
+  Foco em métodos isolados para validar a lógica de negócio. Uso de mocks para dependências externas.
+
+- **Testes de Integração**  
+  Validação do funcionamento conjunto entre componentes, incluindo acesso a banco de dados real ou em memória.
+
+- **Testes de Sistema / End-to-End (E2E)**  
+  Simulação de fluxo completo da aplicação para garantir comportamento esperado do usuário.
+
+### Ferramentas e Frameworks Utilizados
+
+- **xUnit** — Framework para testes unitários e de integração, especialmente no contexto .NET.  
+- **Mockito** — Biblioteca para mocks em testes Java.  
+- **WebApplicationFactory** — Facilita testes de integração em APIs .NET simulando o ambiente real da aplicação.  
+- **Postman / Swagger** — Para testes manuais, automação de chamadas API e documentação de endpoints.
+
+### Boas Práticas e Dicas
+
+- **Isolamento**  
+  Usar mocks para isolar dependências externas, evitando efeitos colaterais e garantindo velocidade nos testes.
+
+- **Cobertura**  
+  Priorizar cobertura dos fluxos críticos e casos de borda.
+
+- **Padronização**  
+  Centralizar padrões para tratamento de erros, mensagens e estrutura dos testes para facilitar manutenção.
+
+- **Testes Automatizados em Pipeline**  
+  Integrar testes em CI/CD para feedback rápido.
+
+- **Naming Conventions**  
+  Nomear testes de forma clara para facilitar o entendimento do propósito.
+
+- **Uso de ArgumentCaptor**  
+  Capturar e verificar argumentos passados para métodos durante os testes para maior assertividade.
+
+---
+
+## Uso de Inteligência Artificial
+
+### Contexto e Objetivos
+
+- Aplicação de IA para automatizar e auxiliar processos no projeto.  
+- Exemplos: geração de código, sugestões para melhorias, automação de tarefas repetitivas e análise preditiva.
+
+### Implementações e Exemplos
+
+- **Assistente de Geração de Código**  
+  Uso de modelos de linguagem para criar esboços de métodos, testes e documentação.
+
+- **Análise de Código**  
+  Auxílio na identificação de potenciais bugs ou melhorias usando IA.
+
+- **Suporte a Decisões**  
+  Implementação de lógica preditiva baseada em dados históricos para otimização de processos.
+
+- **Automação de Documentação**  
+  Geração automática de README, comentários e padrões a partir do código fonte.
+
+### Recomendações para Evolução
+
+- Explorar modelos avançados para análise semântica do código.  
+- Integrar ferramentas de IA nos pipelines de CI/CD para feedback contínuo.  
+- Utilizar IA para refatoração automática baseada em padrões reconhecidos.  
+- Estudar uso de IA para geração dinâmica de casos de teste automatizados.
+
+---
+
 ## Contribuição
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
 
